@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Discovery Feed AI — Semantic Content Discovery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--blue); }
+  .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; margin-top: 16px; }
+  .feed-card {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--blue);
+    border-radius: 6px; padding: 22px; display: flex; flex-direction: column;
+    transition: all 0.25s; position: relative; min-height: 220px;
+  }
+  .feed-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .feed-card h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+  .feed-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; flex: 1; }
+  .feed-card .score { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--blue); margin-bottom: 8px; letter-spacing: 0.08em; }
+  .feed-card .explanation {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted);
+    font-style: italic; padding: 10px 0 0; border-top: 1px solid var(--border); margin-top: 8px; line-height: 1.6;
+  }
+  .feed-card .watch-btn {
+    align-self: flex-start; margin-top: 12px; padding: 7px 14px;
+    background: transparent; color: var(--blue); border: 1px solid var(--blue);
+    border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  }
+  .feed-card .watch-btn:hover { background: var(--blue); color: var(--bg); }
+  .search-row { display: flex; gap: 10px; margin-bottom: 6px; }
+  .search-row input { flex: 1; }
+  .quick-queries { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+  .quick-queries .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .quick-queries button {
+    background: transparent; border: 1px solid var(--border-2); color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    padding: 5px 12px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+  }
+  .quick-queries button:hover { border-color: var(--blue); color: var(--blue); }
+  .history {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted);
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .history .tag { background: var(--surface); padding: 3px 9px; border-radius: 2px; color: var(--blue); border: 1px solid var(--blue); }
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 02 · DISCOVERY FEED</div>
+    <div class="proj-brand-title">Discovery Feed AI<span style="color:var(--blue)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Semantic ranking · Natural-language explanations</div>
+  <h1>Solving the <em>"what's next"</em> problem<br/>after binge-ending.</h1>
+  <p>Vertical discovery feed with TF-IDF semantic ranking. Every result includes a <strong>natural-language explanation</strong> of why it was recommended — directly addresses post-binge vacuum churn, the #1 trigger for subscription cancellation on streaming platforms.</p>
+</section>
+
+<main class="proj-main">
+  <div class="proj-section-title">— Semantic search</div>
+
+  <div class="proj-card">
+    <div class="search-row">
+      <input id="q" class="proj-input" value="space adventure" placeholder="Describe what you're in the mood for..." />
+      <button class="proj-btn" onclick="loadFeed()">Search →</button>
+    </div>
+    <div class="quick-queries">
+      <span class="label">TRY:</span>
+      <button onclick="quickQ('sci-fi robot')">sci-fi robot</button>
+      <button onclick="quickQ('family adventure')">family adventure</button>
+      <button onclick="quickQ('heartfelt drama')">heartfelt drama</button>
+      <button onclick="quickQ('action pirates')">action pirates</button>
+    </div>
+    <div class="history" id="history" style="display:none"></div>
+  </div>
+
+  <div class="proj-section-title">— Ranked results</div>
+  <div id="feed" class="feed-grid"><div class="empty-state">Loading…</div></div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>GET /feed?q=QUERY</code> returns ranked TF-IDF results with scores and explanations &nbsp;·&nbsp;
+    <code>POST /watch</code> with <code>{title}</code> logs history for personalization<br/>
+    Default URL: <strong>http://127.0.0.1:8001</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8001</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8001';
+
+const FALLBACK = [
+  {id:"1",title:"Space Cats",synopsis:"Cats save the galaxy.",tags:"space sci-fi family comedy",score:0.82},
+  {id:"4",title:"Sky Pirates",synopsis:"Treasure hunters soar through the clouds.",tags:"action adventure sky pirates",score:0.61},
+  {id:"2",title:"Jungle Adventure",synopsis:"Kids explore a magical jungle.",tags:"jungle family adventure warm",score:0.43},
+  {id:"3",title:"Robot Dreams",synopsis:"A robot discovers art and identity.",tags:"robot sci-fi heartfelt drama",score:0.28}
+];
+
+const watchHistory = [];
+
+function quickQ(q) { document.getElementById('q').value = q; loadFeed(); }
+
+async function loadFeed() {
+  const q = document.getElementById('q').value.trim() || 'family adventure';
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '<div class="empty-state">Searching catalog…</div>';
+
+  let results, offline = false;
+  try {
+    const r = await fetch(`${API}/feed?q=${encodeURIComponent(q)}`);
+    if (!r.ok) throw new Error('api');
+    const data = await r.json();
+    results = data.results;
+  } catch (e) {
+    offline = true;
+    results = FALLBACK.map(x => ({ ...x, explanation: `Matched your search for '${q}'` }));
+  }
+
+  feed.innerHTML = results.map(r => `
+    <div class="feed-card">
+      <div class="score">◆ score: ${(r.score || 0).toFixed(3)}</div>
+      <h3>${r.title}</h3>
+      <p>${r.synopsis}</p>
+      <div class="explanation">${r.explanation || ''}</div>
+      <button class="watch-btn" onclick="doWatch('${r.title.replace(/'/g, "\\'")}')">+ Add to history</button>
+    </div>
+  `).join('');
+
+  if (offline) {
+    feed.insertAdjacentHTML('afterend', '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-top:12px;letter-spacing:0.08em">⚠ API offline — showing static fallback results</div>');
+  }
+}
+
+async function doWatch(title) {
+  try {
+    await fetch(`${API}/watch`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({title}) });
+  } catch (e) {}
+  if (!watchHistory.includes(title)) watchHistory.push(title);
+  const h = document.getElementById('history');
+  h.style.display = 'flex';
+  h.innerHTML = '<span>HISTORY:</span>' + watchHistory.slice(-5).map(t => `<span class="tag">${t}</span>`).join('');
+  loadFeed();
+}
+
+loadFeed();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+[
+  {"id":"f1","service":"Pluto TV","title":"Action Vault","type":"free","tags":"action fast cars heist"},
+  {"id":"f2","service":"Pluto TV","title":"Family Laughs","type":"free","tags":"family comedy kids warm"},
+  {"id":"p1","service":"Paramount+","title":"Star Frontier","type":"premium","tags":"space sci-fi adventure epic"},
+  {"id":"p2","service":"Paramount+","title":"Championship Access","type":"premium","tags":"sports live exclusive premium"},
+  {"id":"p3","service":"Paramount+","title":"Mystery Estate","type":"premium","tags":"mystery thriller prestige drama"}
+]

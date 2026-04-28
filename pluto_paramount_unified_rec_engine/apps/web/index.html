@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Unified Rec Engine — Pluto TV + Paramount+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--gold); }
+  .search-row { display: flex; gap: 10px; }
+  .search-row input { flex: 1; }
+  .quick-queries { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+  .quick-queries .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .quick-queries button {
+    background: transparent; border: 1px solid var(--border-2); color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    padding: 5px 12px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+  }
+  .quick-queries button:hover { border-color: var(--gold); color: var(--gold); }
+
+  .recs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 800px) { .recs-layout { grid-template-columns: 1fr; } }
+
+  .rec-column {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  .rec-col-head {
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .rec-col-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; }
+  .rec-col-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    padding: 3px 9px; border-radius: 2px; border: 1px solid;
+  }
+  .rec-col.free .rec-col-head { background: linear-gradient(90deg, rgba(67,217,173,0.08), transparent); }
+  .rec-col.free .rec-col-badge { color: var(--green); border-color: var(--green); }
+  .rec-col.premium .rec-col-head { background: linear-gradient(90deg, rgba(200,169,110,0.1), transparent); }
+  .rec-col.premium .rec-col-badge { color: var(--gold); border-color: var(--gold); }
+  .rec-col-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+
+  .rec-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 14px 16px; transition: all 0.2s;
+  }
+  .rec-item.free { border-left: 3px solid var(--green); }
+  .rec-item.premium { border-left: 3px solid var(--gold); }
+  .rec-item:hover { background: #1b1b28; transform: translateX(2px); }
+  .rec-item h4 { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .rec-item .service { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .rec-item.free .service { color: var(--green); }
+  .rec-item.premium .service { color: var(--gold); }
+  .rec-item .tags { font-size: 11px; color: var(--muted); margin-bottom: 6px; font-style: italic; }
+  .rec-item .why { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--border); line-height: 1.6; }
+  .rec-item .score { float: right; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+  .empty-col { padding: 30px 16px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+  .upgrade-panel {
+    background: linear-gradient(135deg, rgba(200,169,110,0.1), rgba(232,200,148,0.04));
+    border: 1px solid var(--gold); border-radius: 6px;
+    padding: 22px; margin-top: 20px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }
+  .upgrade-icon {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--gold);
+    display: flex; align-items: center; justify-content: center; color: var(--bg);
+    font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; flex-shrink: 0;
+  }
+  .upgrade-content { flex: 1; min-width: 240px; }
+  .upgrade-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .upgrade-msg { font-size: 15px; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
+  .upgrade-offer { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  .churn-panel {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 18px 22px; margin-top: 14px; display: flex; gap: 16px; align-items: center;
+  }
+  .churn-indicator {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .churn-indicator.low { background: var(--green); box-shadow: 0 0 14px var(--green); }
+  .churn-indicator.medium { background: var(--amber); box-shadow: 0 0 14px var(--amber); }
+  .churn-indicator.high { background: var(--red); box-shadow: 0 0 14px var(--red); }
+  .churn-body { flex: 1; }
+  .churn-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .churn-risk { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .churn-risk.low { color: var(--green); }
+  .churn-risk.medium { color: var(--amber); }
+  .churn-risk.high { color: var(--red); }
+  .churn-reason { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 07 · UNIFIED REC ENGINE</div>
+    <div class="proj-brand-title">Pluto + Paramount+<span style="color:var(--gold)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Free → Premium conversion · Churn detection · Unified catalog</div>
+  <h1>A <em>single recommendation layer</em> bridging<br/>free-tier and premium catalogs.</h1>
+  <p>Takes a user interest, recommends titles from both <strong>Pluto TV (free)</strong> and <strong>Paramount+ (premium)</strong>, generates contextual upgrade prompts, and flags churn-risk signals. Directly addresses <strong>Skydance's "tech-media hybrid"</strong> vision for unified DTC economics.</p>
+</section>
+
+<main class="proj-main">
+  <div class="proj-section-title">— User interest signal</div>
+
+  <div class="proj-card">
+    <div class="search-row">
+      <input id="interest" class="proj-input" value="space adventure" placeholder="What is the user interested in?" />
+      <button class="proj-btn" onclick="loadRecs()">Recommend →</button>
+    </div>
+    <div class="quick-queries">
+      <span class="label">TRY:</span>
+      <button onclick="quickQ('live sports championship')">live sports</button>
+      <button onclick="quickQ('prestige mystery drama')">prestige drama</button>
+      <button onclick="quickQ('family comedy kids')">family comedy</button>
+      <button onclick="quickQ('action heist cars')">action heist</button>
+    </div>
+  </div>
+
+  <div id="results">
+    <div class="empty">Enter a user interest and run recommendations.</div>
+  </div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>GET /recommend?interest=SEED</code>
+    → returns ranked free + premium titles, upgrade prompt if applicable, churn-risk signal<br/>
+    Default URL: <strong>http://127.0.0.1:8004</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8004</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8004';
+
+const CATALOG = [
+  {id:"f1",service:"Pluto TV",title:"Action Vault",type:"free",tags:"action fast cars heist"},
+  {id:"f2",service:"Pluto TV",title:"Family Laughs",type:"free",tags:"family comedy kids warm"},
+  {id:"p1",service:"Paramount+",title:"Star Frontier",type:"premium",tags:"space sci-fi adventure epic"},
+  {id:"p2",service:"Paramount+",title:"Championship Access",type:"premium",tags:"sports live exclusive premium"},
+  {id:"p3",service:"Paramount+",title:"Mystery Estate",type:"premium",tags:"mystery thriller prestige drama"},
+];
+
+function tfScore(interest, text) {
+  const iw = interest.toLowerCase().split(/\s+/).filter(Boolean);
+  const tw = text.toLowerCase().split(/\s+/).filter(Boolean);
+  let m = 0;
+  iw.forEach(w => { if (tw.some(t => t === w || t.startsWith(w) || w.startsWith(t))) m++; });
+  return m / Math.max(iw.length, 1);
+}
+
+function fallbackRec(interest) {
+  const ranked = CATALOG.map(c => ({ ...c, score: +tfScore(interest, c.tags + ' ' + c.title).toFixed(3), why: `Matches your interest in ${interest}.` }))
+    .sort((a,b) => b.score - a.score);
+  const hasPremium = ranked.some(r => r.type === 'premium' && r.score > 0.1);
+  const churnLevel = interest.toLowerCase().includes('sport') ? 'low' : 'medium';
+  return {
+    interest,
+    results: ranked.slice(0, 4),
+    upgrade_prompt: hasPremium ? {
+      message: `Upgrade to Paramount+ to unlock premium titles that best match ${interest}.`,
+      offer: '7-day trial + premium recommendations'
+    } : null,
+    churn: {
+      risk_level: churnLevel,
+      reason: 'User is engaging with a narrow cluster of content; broaden recommendations with one premium bridge title.'
+    }
+  };
+}
+
+function quickQ(q) { document.getElementById('interest').value = q; loadRecs(); }
+
+async function loadRecs() {
+  const interest = document.getElementById('interest').value.trim() || 'space adventure';
+  const results = document.getElementById('results');
+  results.innerHTML = '<div class="empty">Fetching recommendations…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/recommend?interest=${encodeURIComponent(interest)}`);
+    if (!r.ok) throw new Error('api');
+    data = await r.json();
+  } catch (e) {
+    offline = true;
+    data = fallbackRec(interest);
+  }
+
+  const freeItems = data.results.filter(r => r.type === 'free');
+  const premiumItems = data.results.filter(r => r.type === 'premium');
+
+  const renderCol = (items, tier) => items.length === 0
+    ? `<div class="empty-col">No ${tier} matches for this interest.</div>`
+    : items.map(r => `
+        <div class="rec-item ${r.type}">
+          <span class="score">score: ${r.score.toFixed(3)}</span>
+          <div class="service">◆ ${r.service.toUpperCase()}</div>
+          <h4>${r.title}</h4>
+          <div class="tags">${r.tags}</div>
+          <div class="why">${r.why}</div>
+        </div>
+      `).join('');
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:0.08em">⚠ API offline — showing static recommendation fallback</div>' : ''}
+
+    <div class="proj-section-title">— Dual-tier recommendations</div>
+    <div class="recs-layout">
+      <div class="rec-column rec-col free">
+        <div class="rec-col-head">
+          <div class="rec-col-title">Free tier</div>
+          <div class="rec-col-badge">PLUTO TV</div>
+        </div>
+        <div class="rec-col-body">${renderCol(freeItems, 'free')}</div>
+      </div>
+      <div class="rec-column rec-col premium">
+        <div class="rec-col-head">
+          <div class="rec-col-title">Premium tier</div>
+          <div class="rec-col-badge">PARAMOUNT+</div>
+        </div>
+        <div class="rec-col-body">${renderCol(premiumItems, 'premium')}</div>
+      </div>
+    </div>
+
+    ${data.upgrade_prompt ? `
+      <div class="upgrade-panel">
+        <div class="upgrade-icon">↑</div>
+        <div class="upgrade-content">
+          <div class="upgrade-label">CONVERSION OPPORTUNITY</div>
+          <div class="upgrade-msg">${data.upgrade_prompt.message}</div>
+          <div class="upgrade-offer">◆ Offer: ${data.upgrade_prompt.offer}</div>
+        </div>
+      </div>
+    ` : ''}
+
+    <div class="churn-panel">
+      <div class="churn-indicator ${data.churn.risk_level}"></div>
+      <div class="churn-body">
+        <div class="churn-lbl">CHURN-RISK SIGNAL</div>
+        <div class="churn-risk ${data.churn.risk_level}">${data.churn.risk_level.toUpperCase()}</div>
+        <div class="churn-reason">${data.churn.reason}</div>
+      </div>
+    </div>
+  `;
+}
+
+loadRecs();
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ad Creative Studio — Brief-to-Campaign Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--amber); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+  .concepts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .concept {
+    background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--amber);
+    border-radius: 6px; padding: 22px; transition: all 0.2s;
+  }
+  .concept:hover { border-top-color: var(--gold); }
+  .concept-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .concept h3 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .concept .angle { font-style: italic; color: var(--text); font-size: 13px; margin-bottom: 10px; line-height: 1.6; }
+  .concept .tagline { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); margin-bottom: 8px; }
+  .concept .hook { font-size: 12px; color: var(--muted); line-height: 1.7; padding-top: 10px; border-top: 1px solid var(--border); }
+  .scripts-stack { display: flex; flex-direction: column; gap: 10px; }
+  .script {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--amber);
+    border-radius: 4px; padding: 16px 20px; display: flex; gap: 18px; align-items: flex-start;
+  }
+  .script-dur { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--amber); min-width: 48px; }
+  .script-text { font-size: 13px; color: var(--text); line-height: 1.7; }
+  .storyboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .sb-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 18px; position: relative; overflow: hidden;
+  }
+  .sb-scene-num {
+    position: absolute; top: 12px; right: 14px; font-family: 'JetBrains Mono', monospace;
+    font-size: 36px; font-weight: 600; color: var(--amber); opacity: 0.18; line-height: 1;
+  }
+  .sb-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 8px; position: relative; z-index: 2; }
+  .sb-visual { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 10px; position: relative; z-index: 2; }
+  .sb-copy { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); font-style: italic; padding-top: 8px; border-top: 1px solid var(--border); position: relative; z-index: 2; }
+  .summary-panel { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .summary-stat { background: var(--card); padding: 18px; text-align: center; }
+  .summary-stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 6px; text-transform: uppercase; }
+  .summary-stat .val { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; color: var(--amber); }
+  .summary-note { padding: 18px 22px; font-size: 13px; color: var(--text); line-height: 1.7; font-style: italic; border-top: 1px solid var(--border); }
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 05 · AD CREATIVE STUDIO</div>
+    <div class="proj-brand-title">Ad Creative Studio<span style="color:var(--amber)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Brief → concepts → scripts → storyboard</div>
+  <h1>From <em>one brief</em> to a full streaming campaign in seconds.</h1>
+  <p>Generates 3 ad concepts, 6s/15s/30s scripts, a 3-panel storyboard, and an AI performance summary from a single campaign brief. Built for <strong>Paramount's ad-tier expansion</strong> and <strong>Netflix's 94M ad-tier users</strong> — where speed-to-creative is the bottleneck.</p>
+</section>
+
+<main class="proj-main">
+  <div class="proj-section-title">— Campaign brief</div>
+
+  <div class="proj-card">
+    <div class="form-grid">
+      <div>
+        <label class="proj-label">BRAND</label>
+        <input id="brand" class="proj-input" value="Orbit Shoes" />
+      </div>
+      <div>
+        <label class="proj-label">PRODUCT</label>
+        <input id="product" class="proj-input" value="AirRun X" />
+      </div>
+      <div>
+        <label class="proj-label">TARGET AUDIENCE</label>
+        <input id="audience" class="proj-input" value="urban runners aged 25-40" />
+      </div>
+      <div>
+        <label class="proj-label">CAMPAIGN GOAL</label>
+        <input id="goal" class="proj-input" value="product launch awareness" />
+      </div>
+    </div>
+    <div>
+      <label class="proj-label">PLACEMENT CONTEXT</label>
+      <input id="context" class="proj-input" value="streaming ad-tier, live sports breaks" />
+    </div>
+    <button class="proj-btn" onclick="generate()" style="margin-top: 14px;">Generate campaign →</button>
+  </div>
+
+  <div id="results">
+    <div class="empty">Fill in the brief and generate a campaign to see the creative output.</div>
+  </div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>POST /generate</code> with <code>{brand, product, audience, goal, context}</code>
+    → returns concepts + scripts + storyboard + summary<br/>
+    Default URL: <strong>http://127.0.0.1:8002</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8002</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8002';
+
+const FALLBACK_FN = (payload) => {
+  const {brand, product, audience, goal, context} = payload;
+  return {
+    concepts: [
+      { id:1, title:`${brand} Concept 1`, angle:`emotion-first storytelling to drive ${goal}`, tagline:`${product} for ${audience}`, hook:`In ${context}, show how ${product} unlocks value for ${audience}.` },
+      { id:2, title:`${brand} Concept 2`, angle:`product-benefit clarity to improve ${goal}`, tagline:`${product} for ${audience}`, hook:`In ${context}, show how ${product} unlocks value for ${audience}.` },
+      { id:3, title:`${brand} Concept 3`, angle:`social-proof and urgency to increase ${goal}`, tagline:`${product} for ${audience}`, hook:`In ${context}, show how ${product} unlocks value for ${audience}.` },
+    ],
+    scripts: {
+      "6s": `${brand}: ${product}. Fast, clear, made for ${audience}. Try it now.`,
+      "15s": `Meet ${product} from ${brand}. In one quick moment, viewers see the core benefit, why it matters to ${audience}, and a strong call to action built for ${goal}.`,
+      "30s": `Open with a problem your audience recognizes. Introduce ${product} as the answer. Show one emotional beat, one proof point, and one memorable branded ending. Close with a direct CTA optimized for ${goal}.`,
+    },
+    storyboard: [
+      { scene:1, visual:`Establish a ${context} setting with ${audience} on screen.`, copy:`The moment before ${product}.` },
+      { scene:2, visual:`Reveal ${product} in action.`, copy:`${brand} changes the flow.` },
+      { scene:3, visual:`Show the payoff and brand lockup.`, copy:`Choose ${product}.` },
+    ],
+    summary: {
+      predicted_ctr: "2.8%",
+      predicted_completion_rate: "74%",
+      best_fit_segment: audience,
+      llm_summary: `The strongest concept is the emotion-first version because it aligns ${brand} with a clear viewer payoff while staying concise enough for streaming placements.`
+    }
+  };
+};
+
+async function generate() {
+  const payload = {
+    brand: document.getElementById('brand').value,
+    product: document.getElementById('product').value,
+    audience: document.getElementById('audience').value,
+    goal: document.getElementById('goal').value,
+    context: document.getElementById('context').value,
+  };
+  const results = document.getElementById('results');
+  results.innerHTML = '<div class="empty">Generating campaign…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/generate`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error('api');
+    data = await r.json();
+  } catch (e) {
+    offline = true;
+    data = FALLBACK_FN(payload);
+  }
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-bottom:14px;letter-spacing:0.08em">⚠ API offline — showing static generator fallback</div>' : ''}
+
+    <div class="proj-section-title">— Three concept directions</div>
+    <div class="concepts-grid">
+      ${data.concepts.map(c => `
+        <div class="concept">
+          <div class="concept-num">CONCEPT · 0${c.id}</div>
+          <h3>${c.title}</h3>
+          <div class="angle">${c.angle}</div>
+          <div class="tagline">◆ ${c.tagline}</div>
+          <div class="hook">${c.hook}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="proj-section-title">— Scripts (6s / 15s / 30s)</div>
+    <div class="scripts-stack">
+      ${Object.entries(data.scripts).map(([dur, text]) => `
+        <div class="script">
+          <div class="script-dur">${dur}</div>
+          <div class="script-text">${text}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="proj-section-title">— Storyboard</div>
+    <div class="storyboard">
+      ${data.storyboard.map(s => `
+        <div class="sb-card">
+          <div class="sb-scene-num">${s.scene}</div>
+          <div class="sb-label">SCENE ${s.scene}</div>
+          <div class="sb-visual">${s.visual}</div>
+          <div class="sb-copy">"${s.copy}"</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="proj-section-title">— AI performance forecast</div>
+    <div class="summary-panel">
+      <div class="summary-stats">
+        <div class="summary-stat">
+          <div class="lbl">Predicted CTR</div>
+          <div class="val">${data.summary.predicted_ctr}</div>
+        </div>
+        <div class="summary-stat">
+          <div class="lbl">Completion Rate</div>
+          <div class="val">${data.summary.predicted_completion_rate}</div>
+        </div>
+        <div class="summary-stat">
+          <div class="lbl">Best-fit Segment</div>
+          <div class="val" style="font-size:13px;line-height:1.4">${data.summary.best_fit_segment}</div>
+        </div>
+      </div>
+      <div class="summary-note">"${data.summary.llm_summary}"</div>
+    </div>
+  `;
+}
+
+generate();
+</script>
+</body>
+</html>

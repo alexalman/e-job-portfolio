@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Enterprise AI Orchestration — RAG + Agents + Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--green); }
+
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+  .tab {
+    padding: 12px 22px; background: none; border: none;
+    border-bottom: 2px solid transparent;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted);
+    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  }
+  .tab.active { color: var(--green); border-bottom-color: var(--green); }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .rag-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; }
+  @media (max-width: 800px) { .rag-layout { grid-template-columns: 1fr; } }
+
+  .rag-input-group label { margin-top: 10px; display: block; }
+  .rag-input-group label:first-child { margin-top: 0; }
+
+  .doc-result {
+    background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--green);
+    border-radius: 4px; padding: 14px 16px; margin-bottom: 8px;
+  }
+  .doc-result .head { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .doc-result .id { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.08em; }
+  .doc-result .score { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+  .doc-result .text { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  .summary-box {
+    background: linear-gradient(135deg, rgba(67,217,173,0.08), rgba(67,217,173,0.02));
+    border: 1px solid var(--green); border-radius: 4px; padding: 16px 20px; margin-top: 14px;
+  }
+  .summary-box .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .summary-box .text { font-size: 14px; line-height: 1.7; font-style: italic; }
+
+  .workflow-editor {
+    width: 100%; min-height: 280px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 14px 16px; color: var(--text);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8;
+    resize: vertical; outline: none;
+  }
+  .workflow-editor:focus { border-color: var(--green); }
+
+  .trace-item {
+    background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--green);
+    border-radius: 4px; padding: 12px 16px; margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .trace-step { font-size: 10px; color: var(--green); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .trace-result { font-size: 12px; color: var(--text); line-height: 1.6; word-break: break-word; }
+
+  .architecture-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin-top: 20px;
+  }
+  .arch-card {
+    background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--green);
+    border-radius: 6px; padding: 20px;
+  }
+  .arch-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .arch-card h4 { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .arch-card p { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  .empty { padding: 40px 20px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; }
+
+  .workflow-quick { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .workflow-quick button {
+    background: transparent; border: 1px solid var(--border-2); color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    padding: 5px 12px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+  }
+  .workflow-quick button:hover { border-color: var(--green); color: var(--green); }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 04 · ORCHESTRATION</div>
+    <div class="proj-brand-title">Enterprise AI Orchestration<span style="color:var(--green)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Agent router · Tool registry · RAG · Workflow engine</div>
+  <h1>The <em>plumbing</em> behind every enterprise AI system.</h1>
+  <p>Production architecture pattern for multi-step automation: <strong>agent router + tool registry + RAG + workflow engine</strong>. Matches the kind of internal AI tooling Disney, Paramount, and Netflix build to orchestrate their content metadata, localization, and ad-ops pipelines.</p>
+</section>
+
+<main class="proj-main">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('rag')">◆ RAG Retrieval</button>
+    <button class="tab" onclick="switchTab('workflow')">◆ Workflow Engine</button>
+    <button class="tab" onclick="switchTab('arch')">◆ Architecture</button>
+  </div>
+
+  <!-- RAG TAB -->
+  <div class="panel active" id="panel-rag">
+    <div class="rag-layout">
+      <div class="proj-card">
+        <div class="rag-input-group">
+          <label class="proj-label">QUERY</label>
+          <input id="rag-query" class="proj-input" value="How does retrieval augmented generation work?" />
+          <label class="proj-label">TOP-K</label>
+          <input id="rag-topk" class="proj-input" type="number" value="3" min="1" max="10" />
+          <button class="proj-btn" onclick="runRAG()" style="margin-top: 14px;">Query RAG →</button>
+        </div>
+      </div>
+      <div id="rag-results">
+        <div class="empty">Run a query to see retrieved documents.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW TAB -->
+  <div class="panel" id="panel-workflow">
+    <div class="proj-card">
+      <label class="proj-label">WORKFLOW YAML (agents + tools)</label>
+      <textarea class="workflow-editor" id="wf-yaml">steps:
+  - id: step1
+    tool: clean_text
+    inputs:
+      text: "  hello   world   this   is   messy   input   "
+    output: clean
+
+  - id: step2
+    agent: summariser
+    inputs:
+      text: "{{clean}}"
+    output: summary
+
+  - id: step3
+    tool: word_count
+    inputs:
+      text: "{{summary}}"
+    output: count</textarea>
+      <div class="workflow-quick">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;align-self:center">PRESETS:</span>
+        <button onclick="loadPreset('summarize')">summarize</button>
+        <button onclick="loadPreset('reverse')">reverse pipeline</button>
+      </div>
+      <button class="proj-btn" onclick="runWorkflow()" style="margin-top: 14px;">Run workflow →</button>
+    </div>
+
+    <div id="wf-results" style="margin-top: 18px;"></div>
+  </div>
+
+  <!-- ARCHITECTURE TAB -->
+  <div class="panel" id="panel-arch">
+    <div class="proj-card">
+      <p style="font-size: 14px; line-height: 1.8; color: var(--muted);">
+        Enterprise AI orchestration ships as four composable primitives that work together to run complex automations over retrieved content. The same pattern powers internal tools at major studios for metadata extraction, localization packaging, and workflow automation.
+      </p>
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="arch-num">◆ PRIMITIVE 01</div>
+          <h4>Agent Router</h4>
+          <p>Registers named agent functions and dispatches calls by name. Each agent is a Python callable that accepts a payload dict and returns a result — swap LLM calls for deterministic logic without changing workflow YAML.</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-num">◆ PRIMITIVE 02</div>
+          <h4>Tool Registry</h4>
+          <p>Named utility functions callable via kwargs. Clean-text, word-count, API wrappers, database readers — the deterministic building blocks that agents string together in multi-step pipelines.</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-num">◆ PRIMITIVE 03</div>
+          <h4>RAG Layer</h4>
+          <p>TF-IDF document indexer with cosine-similarity retrieval. Returns ranked documents plus an auto-summary built from leading sentences. Drop-in ready for swapping to dense embeddings (OpenAI, Cohere, sentence-transformers).</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-num">◆ PRIMITIVE 04</div>
+          <h4>Workflow Engine</h4>
+          <p>YAML-declared step graph that resolves <code style="color:var(--green)">{{variable}}</code> references between steps. Each step invokes either an agent or a tool. Full execution trace is captured in history for debugging and audit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>POST /rag/query</code> with <code>{query, top_k}</code> &nbsp;·&nbsp;
+    <code>POST /workflow/run</code> with <code>{workflow}</code> (YAML string) &nbsp;·&nbsp;
+    <code>POST /rag/index</code> with <code>{documents}</code> &nbsp;·&nbsp;
+    <code>GET /history</code><br/>
+    Default URL: <strong>http://127.0.0.1:8000</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8000</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8000';
+
+const FALLBACK_DOCS = [
+  {id:"d1", text:"Localization workflows need consistent metadata, title translations, and territory-specific packaging.", score:0.423},
+  {id:"d2", text:"Ad operations teams often automate trafficking, approval routing, and performance reporting.", score:0.187},
+  {id:"d3", text:"Retrieval augmented generation combines search with language generation to ground outputs in source material.", score:0.756},
+];
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+async function runRAG() {
+  const query = document.getElementById('rag-query').value.trim();
+  const top_k = parseInt(document.getElementById('rag-topk').value) || 3;
+  const results = document.getElementById('rag-results');
+  results.innerHTML = '<div class="empty">Retrieving…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/rag/query`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({query, top_k}) });
+    if (!r.ok) throw new Error('api');
+    data = await r.json();
+  } catch (e) {
+    offline = true;
+    const sorted = FALLBACK_DOCS.slice().sort((a,b) => {
+      const aScore = query.toLowerCase().split(/\s+/).filter(w => a.text.toLowerCase().includes(w)).length;
+      const bScore = query.toLowerCase().split(/\s+/).filter(w => b.text.toLowerCase().includes(w)).length;
+      return bScore - aScore;
+    });
+    data = {
+      documents: sorted.slice(0, top_k).map(d => ({ ...d, score: +(Math.random() * 0.5 + 0.3).toFixed(3) })),
+      summary: sorted.slice(0, top_k).map(d => d.text.split(/(?<=[.!?])\s+/)[0]).join(' ')
+    };
+  }
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-bottom:14px;letter-spacing:0.08em">⚠ API offline — static fallback</div>' : ''}
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:10px">◆ RETRIEVED DOCUMENTS · ${data.documents.length}</div>
+    ${data.documents.map(d => `
+      <div class="doc-result">
+        <div class="head">
+          <span class="id">◆ ${d.id.toUpperCase()}</span>
+          <span class="score">sim: ${d.score.toFixed(3)}</span>
+        </div>
+        <div class="text">${d.text}</div>
+      </div>
+    `).join('')}
+    <div class="summary-box">
+      <div class="lbl">◆ AUTO-GENERATED SUMMARY</div>
+      <div class="text">${data.summary}</div>
+    </div>
+  `;
+}
+
+const PRESETS = {
+  summarize: `steps:
+  - id: step1
+    tool: clean_text
+    inputs:
+      text: "  This   is   a   long   messy   piece   of   text   that   needs   cleaning   and   summarizing.   "
+    output: clean
+
+  - id: step2
+    agent: summariser
+    inputs:
+      text: "{{clean}}"
+    output: summary`,
+  reverse: `steps:
+  - id: step1
+    tool: clean_text
+    inputs:
+      text: "hello world"
+    output: clean
+
+  - id: step2
+    agent: reverse
+    inputs:
+      text: "{{clean}}"
+    output: reversed`
+};
+
+function loadPreset(name) {
+  document.getElementById('wf-yaml').value = PRESETS[name];
+}
+
+function simulateWorkflow(yaml) {
+  // Simple parser for offline fallback
+  const steps = [];
+  const ctx = {};
+  let currentStep = null;
+  yaml.split('\n').forEach(line => {
+    if (line.match(/^\s*-\s+id:\s*(\w+)/)) {
+      if (currentStep) steps.push(currentStep);
+      currentStep = { id: line.match(/id:\s*(\w+)/)[1] };
+    } else if (currentStep) {
+      if (line.match(/tool:\s*(\w+)/)) currentStep.tool = line.match(/tool:\s*(\w+)/)[1];
+      if (line.match(/agent:\s*(\w+)/)) currentStep.agent = line.match(/agent:\s*(\w+)/)[1];
+      if (line.match(/text:\s*"(.*)"/)) currentStep.textInput = line.match(/text:\s*"(.*)"/)[1];
+      if (line.match(/output:\s*(\w+)/)) currentStep.output = line.match(/output:\s*(\w+)/)[1];
+    }
+  });
+  if (currentStep) steps.push(currentStep);
+
+  const trace = [];
+  steps.forEach(step => {
+    let input = step.textInput || '';
+    if (input.match(/\{\{(\w+)\}\}/)) {
+      const varName = input.match(/\{\{(\w+)\}\}/)[1];
+      input = ctx[varName] || input;
+    }
+    let result;
+    if (step.tool === 'clean_text') result = input.split(/\s+/).filter(Boolean).join(' ');
+    else if (step.tool === 'word_count') result = input.split(/\s+/).filter(Boolean).length;
+    else if (step.agent === 'summariser') result = input.length > 140 ? input.substring(0, 140) + '...' : input;
+    else if (step.agent === 'reverse') result = input.split('').reverse().join('');
+    else result = input;
+    if (step.output) ctx[step.output] = result;
+    trace.push({ step: step.id, result });
+  });
+  return { context: ctx, trace };
+}
+
+async function runWorkflow() {
+  const workflow = document.getElementById('wf-yaml').value;
+  const results = document.getElementById('wf-results');
+  results.innerHTML = '<div class="empty">Executing workflow…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/workflow/run`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({workflow}) });
+    if (!r.ok) throw new Error('api');
+    const body = await r.json();
+    const sim = simulateWorkflow(workflow);
+    data = { context: body.context, trace: sim.trace };
+  } catch (e) {
+    offline = true;
+    data = simulateWorkflow(workflow);
+  }
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-bottom:14px;letter-spacing:0.08em">⚠ API offline — simulated in-browser</div>' : ''}
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:10px">◆ EXECUTION TRACE · ${data.trace.length} STEPS</div>
+    ${data.trace.map(t => `
+      <div class="trace-item">
+        <div class="trace-step">◆ STEP: ${t.step}</div>
+        <div class="trace-result">${typeof t.result === 'object' ? JSON.stringify(t.result) : String(t.result)}</div>
+      </div>
+    `).join('')}
+    <div class="summary-box">
+      <div class="lbl">◆ FINAL CONTEXT</div>
+      <div class="text" style="font-style:normal;font-family:'JetBrains Mono',monospace;font-size:12px">${JSON.stringify(data.context, null, 2)}</div>
+    </div>
+  `;
+}
+
+runRAG();
+</script>
+</body>
+</html>

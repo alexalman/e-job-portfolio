@@ -1,0 +1,128 @@
+══════════════════════════════════════════════════════════════════════════════════════
+COVER LETTER TEMPLATES — Customized for each target studio
+══════════════════════════════════════════════════════════════════════════════════════
+
+Each letter is ~220 words (ideal length for engineering roles). Fill in the [[ ... ]]
+brackets, replace [ROLE_TITLE] with the specific job you're applying to, and proof
+once. Keep it short — hiring managers scan these.
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+TEMPLATE 1 — NETFLIX
+Best for:  Inkubator CG Artist, GenAI/ML Engineer roles, post-production AI
+──────────────────────────────────────────────────────────────────────────────────────
+
+Dear Netflix Hiring Team,
+
+I am applying for the [ROLE_TITLE] role on the [TEAM / INKUBATOR] team.
+
+Three weeks after Netflix announced the $600M acquisition of InterPositive, I shipped
+ContinuityAI — an open-source implementation of the same class of pipeline. It uses the
+Claude Vision API to analyze consecutive film frames, detect continuity errors across
+seven production categories, and queue auto-fixable issues for VFX. It is live and
+inspectable: github.com/alexalman/e-job-portfolio/tree/main/continuity_ai
+
+The project sits alongside six others in the same portfolio, each targeting a specific
+open problem in streaming — a diffusion-based character consistency toolkit for
+Inkubator-style CG work, a two-tower recommendation engine, and a RAG system for media
+archives among them. Every project runs locally with a polished browser UI.
+
+Before this portfolio I spent six years at Yandex and EPAM Systems shipping large-scale
+ranking models and multilingual NLP systems, followed by five years in AI engineering in
+New York and Los Angeles focused on streaming and media AI.
+
+I would welcome a conversation about how this work maps to what your team is building
+right now. The full portfolio lives at alexalman.github.io/e-job-portfolio.
+
+Best,
+Alex Alman
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+TEMPLATE 2 — DISNEY
+Best for:  Disney Entertainment & ESPN Technology, Staff GenAI/ML, Licensing AI
+──────────────────────────────────────────────────────────────────────────────────────
+
+Dear Disney Hiring Team,
+
+I am applying for the [ROLE_TITLE] role at Disney Entertainment & ESPN Technology.
+
+Disney's scale and IP library create a unique AI engineering challenge: systems that
+serve content personalization, metadata enrichment, and rights-aware content workflows
+simultaneously. My portfolio includes three projects directly relevant:
+
+— Cinematic RAG Studio: production RAG over 50K+ screenplay chunks with scene-aware
+   chunking, FAISS retrieval, and cited outputs. Maps to Disney's content archive AI.
+— LLM Content Intelligence: multi-LLM metadata extraction with structured JSON output,
+   rights conflict detection, and confidence scoring. Matches Disney licensing workflows.
+— Diffusion Character Toolkit: DreamBooth + LoRA fine-tuning for IP-consistent
+   character generation — exactly the IP guardrail problem Disney faces first.
+
+Every project is live, runnable, and in GitHub: github.com/alexalman/e-job-portfolio
+
+My background before this portfolio includes 10+ years of production ML — EPAM
+Systems, Yandex ranking infrastructure, and leadership of AI teams in New York and
+Los Angeles. I ship code that runs at scale and can be audited by senior engineers.
+
+I would appreciate a short conversation about how this experience fits the role.
+Portfolio: alexalman.github.io/e-job-portfolio
+
+Best,
+Alex Alman
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+TEMPLATE 3 — PARAMOUNT
+Best for:  Paramount+, Pluto TV, Paramount Skydance "tech-media hybrid" roles
+──────────────────────────────────────────────────────────────────────────────────────
+
+Dear Paramount Hiring Team,
+
+I am applying for the [ROLE_TITLE] role at Paramount.
+
+Skydance's vision of a "technology-media hybrid" is the exact problem I have been
+building toward. In my portfolio you will find:
+
+— Unified Rec Engine (Pluto + Paramount+): a shared free-to-paid recommendation layer
+   with contextual upgrade prompts and churn-risk signals. Directly addresses the
+   conversion loop Skydance is trying to close.
+— Live Ads Personalization Engine: real-time ad slot planning for live events with
+   segment-aware creative rotation — built for NFL / UEFA live sports monetization.
+— Streaming Ad Creative Studio: brief-to-campaign generation (concepts + scripts +
+   storyboard + performance forecast) for Paramount's ad-tier scaling.
+
+All three are live and inspectable at github.com/alexalman/e-job-portfolio. Each has a
+FastAPI backend and a polished browser UI — clone the repo, run `uvicorn`, and they
+work.
+
+My background spans 10+ years of production ML starting at EPAM and Yandex, with the
+last five years focused on AI for streaming and media in New York and Los Angeles.
+Russian-language NLP was where I started; streaming personalization is where I ended up.
+
+I would be glad to walk through any of this in a conversation.
+Portfolio: alexalman.github.io/e-job-portfolio
+
+Best,
+Alex Alman
+
+
+══════════════════════════════════════════════════════════════════════════════════════
+USAGE NOTES
+══════════════════════════════════════════════════════════════════════════════════════
+
+1. Do NOT send the same letter to all three. Each one is calibrated to the specific
+   technical problems that studio is known to be solving right now (April 2026).
+
+2. Customize the [[ROLE_TITLE]] and [[TEAM]] brackets. Lazy copy-paste is the
+   #1 reason cover letters get ignored.
+
+3. If the job description mentions a specific technology you have in a project
+   (FAISS, Claude, Diffusion, CLIP, etc.), swap the example project at the top of
+   the letter to match. The letter should lead with the most relevant match.
+
+4. Paste directly into the application form's "Cover Letter" field. Do not attach as
+   a PDF unless the form explicitly requires one — applicant tracking systems parse
+   plain text more reliably.
+
+5. Always double-check the recipient name if you can find it on LinkedIn. "Dear
+   [Netflix Hiring Team]" becomes "Dear [Hiring Manager Name]" if you can verify it.

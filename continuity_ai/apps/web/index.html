@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ContinuityAI — Vision-LLM Continuity Detection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#0a0a0e;--surface:#121218;--card:#16161f;--border:#24242f;--border-2:#34344a;
+    --text:#ebe9e2;--muted:#7e7c76;--gold:#c8a96e;--gold-2:#e8c894;
+    --blue:#4cc9f0;--green:#43d9ad;--red:#e05c6a;--amber:#f0a030;--violet:#9f8aea;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Fraunces',Georgia,serif;
+         line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+
+  header {
+    padding:20px 40px; border-bottom:1px solid var(--border); display:flex;
+    justify-content:space-between; align-items:center; backdrop-filter:blur(12px);
+    background:rgba(10,10,14,0.85); position:sticky; top:0; z-index:10;
+  }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .brand-title { font-size:20px; font-weight:700; letter-spacing:-0.02em; }
+  .brand-sub { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; }
+  .back { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; }
+  .back:hover { color:var(--gold); }
+
+  .hero {
+    padding: 60px 40px 40px; max-width:1200px; margin:0 auto;
+  }
+  .hero .eyebrow { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold);
+                    letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px;
+                    display:flex; align-items:center; gap:12px; }
+  .hero .eyebrow::before { content:""; width:32px; height:1px; background:var(--gold); }
+  .hero h1 { font-size:clamp(32px,5vw,56px); font-weight:400; letter-spacing:-0.025em; line-height:1.1; margin-bottom:20px; max-width:900px; }
+  .hero h1 em { font-style:italic; color:var(--gold); font-weight:400; }
+  .hero p { color:var(--muted); font-size:16px; max-width:720px; line-height:1.75; }
+  .hero p strong { color:var(--text); font-weight:600; }
+
+  .stats {
+    max-width:1200px; margin:0 auto; padding:0 40px 40px;
+    display:grid; grid-template-columns:repeat(6,1fr); gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:6px; overflow:hidden;
+  }
+  .stat { background:var(--card); padding:20px 18px; text-align:center; }
+  .stat-label { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; }
+  .stat-val { font-family:'Fraunces',serif; font-size:28px; font-weight:600; }
+
+  main { max-width:1200px; margin:0 auto; padding:20px 40px 60px; }
+  .section-title {
+    display:flex; align-items:center; gap:14px; font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; margin:40px 0 16px;
+  }
+  .section-title::after { content:""; flex:1; height:1px; background:var(--border); }
+
+  .layout { display:grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  .shot-list { max-height: 75vh; overflow-y:auto; padding-right:4px; }
+  .shot-row {
+    background:var(--card); border:1px solid var(--border); border-left:3px solid transparent;
+    border-radius:4px; padding:14px 16px; margin-bottom:8px; cursor:pointer;
+    display:flex; align-items:center; gap:14px; transition:all 0.18s;
+  }
+  .shot-row:hover { background:#1b1b28; border-color:var(--border-2); }
+  .shot-row.selected { border-left-color:var(--gold); background:#1b1b28; }
+  .shot-num { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.08em; min-width:60px; }
+  .shot-tc { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); }
+  .shot-body { flex:1; font-size:13px; color:var(--text); }
+  .shot-score { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:600; min-width:50px; text-align:right; }
+  .shot-flags { display:flex; gap:4px; min-width:80px; justify-content:flex-end; }
+  .flag {
+    font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em;
+    padding:2px 7px; border-radius:2px; border:1px solid;
+  }
+  .flag.high { color:var(--red); border-color:var(--red); background:rgba(224,92,106,0.1); }
+  .flag.med  { color:var(--amber); border-color:var(--amber); background:rgba(240,160,48,0.1); }
+  .flag.low  { color:var(--green); border-color:var(--green); background:rgba(67,217,173,0.1); }
+  .flag.clean { color:var(--green); border-color:var(--green); background:rgba(67,217,173,0.1); }
+
+  .detail-panel {
+    background:var(--card); border:1px solid var(--border); border-radius:6px;
+    overflow:hidden; position:sticky; top:100px; max-height:75vh; display:flex; flex-direction:column;
+  }
+  .detail-head { padding:18px 22px; border-bottom:1px solid var(--border); display:flex; gap:16px; align-items:center; }
+  .score-ring { position:relative; width:60px; height:60px; flex-shrink:0; }
+  .score-ring svg { transform:rotate(-90deg); }
+  .score-ring .val {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+  }
+  .detail-title { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.1em; margin-bottom:3px; }
+  .detail-summary { font-size:13px; color:var(--text); line-height:1.6; }
+  .detail-body { padding: 10px 20px 20px; overflow-y:auto; }
+  .error-group { margin-top:18px; }
+  .error-group-label {
+    font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;
+    padding-bottom:6px; border-bottom:1px solid var(--border);
+  }
+  .error-item {
+    background:var(--surface); border:1px solid var(--border); border-radius:4px;
+    padding:10px 12px; margin-bottom:8px; display:flex; gap:10px; align-items:flex-start;
+  }
+  .error-item.high { border-color: rgba(224,92,106,0.35); background: rgba(224,92,106,0.05); }
+  .error-item.medium { border-color: rgba(240,160,48,0.35); background: rgba(240,160,48,0.05); }
+  .error-item.low { border-color: rgba(67,217,173,0.35); background: rgba(67,217,173,0.05); }
+  .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+  .dot.high { background:var(--red); }
+  .dot.medium { background:var(--amber); }
+  .dot.low { background:var(--green); }
+  .error-content { flex:1; }
+  .error-badges { display:flex; gap:6px; margin-bottom:4px; flex-wrap:wrap; }
+  .error-desc { font-size:13px; color:var(--text); line-height:1.6; margin-bottom:4px; }
+  .error-fix { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted);
+               padding-top:5px; border-top:1px solid var(--border); }
+  .badge {
+    font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.08em;
+    padding:2px 7px; border-radius:2px; border:1px solid; text-transform:uppercase;
+  }
+  .badge-fixable { color:var(--green); border-color:var(--green); }
+
+  .clean-state { padding:40px 20px; text-align:center; color:var(--muted); }
+  .clean-state .icon { font-size:32px; margin-bottom:10px; }
+
+  .custom-analyzer {
+    background:var(--card); border:1px solid var(--border); border-radius:6px;
+    padding:24px; margin-top:36px;
+  }
+  .custom-analyzer h3 { font-size:18px; font-weight:500; margin-bottom:14px; }
+  .input-pair { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px; }
+  @media (max-width:700px) { .input-pair { grid-template-columns:1fr; } }
+  .field-label { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.08em; margin-bottom:5px; display:block; }
+  textarea {
+    width:100%; background:var(--surface); border:1px solid var(--border); border-radius:4px;
+    color:var(--text); font-family:'JetBrains Mono',monospace; font-size:12px;
+    padding:10px 12px; outline:none; resize:vertical; min-height:70px; line-height:1.6;
+  }
+  textarea:focus { border-color:var(--gold); }
+  .btn {
+    padding:10px 22px; background:var(--gold); color:var(--bg); border:none; border-radius:4px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; cursor:pointer; transition:all 0.2s;
+  }
+  .btn:hover { background:var(--gold-2); }
+  .btn:disabled { background:var(--border); color:var(--muted); cursor:not-allowed; }
+  .api-note {
+    margin-top: 40px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; font-family:'JetBrains Mono',monospace; font-size: 11px; color: var(--muted);
+    line-height: 1.8;
+  }
+  .api-note strong { color: var(--gold); }
+  .api-note code {
+    background: var(--card); padding: 1px 7px; border-radius: 2px; color: var(--text);
+    font-family:'JetBrains Mono',monospace;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div>
+      <div class="brand-sub">PROJECT 01 · CONTINUITY AI</div>
+      <div class="brand-title">ContinuityAI<span style="color:var(--gold)">.</span></div>
+    </div>
+  </div>
+  <a href="/" class="back">← ALL PROJECTS</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Vision-LLM post-production pipeline</div>
+  <h1>Automated <em>continuity supervision</em><br/>for the Netflix era.</h1>
+  <p>Scans consecutive film frames to detect continuity errors across seven categories — props, lighting, costume, background extras, makeup, environmental match, and screen direction. <strong>The same class of problem Netflix paid $600M to solve</strong> with the InterPositive acquisition in March 2026.</p>
+</section>
+
+<div class="stats" id="stats">
+  <div class="stat"><div class="stat-label">Shots Analyzed</div><div class="stat-val" style="color:var(--gold)" id="stat-shots">—</div></div>
+  <div class="stat"><div class="stat-label">Total Errors</div><div class="stat-val" style="color:var(--red)" id="stat-errors">—</div></div>
+  <div class="stat"><div class="stat-label">High Severity</div><div class="stat-val" style="color:var(--red)" id="stat-high">—</div></div>
+  <div class="stat"><div class="stat-label">Auto-Fixable</div><div class="stat-val" style="color:var(--green)" id="stat-fixable">—</div></div>
+  <div class="stat"><div class="stat-label">Avg Score</div><div class="stat-val" style="color:var(--blue)" id="stat-score">—</div></div>
+  <div class="stat"><div class="stat-label">Hours Saved</div><div class="stat-val" style="color:var(--violet)" id="stat-hours">—</div></div>
+</div>
+
+<main>
+  <div class="section-title">— Shot-by-shot continuity analysis</div>
+
+  <div class="layout">
+    <div class="shot-list" id="shot-list"></div>
+    <div class="detail-panel" id="detail-panel">
+      <div class="clean-state">
+        <div class="icon">◆</div>
+        Select a shot pair to inspect detected continuity errors.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">— Analyze your own shot pair</div>
+
+  <div class="custom-analyzer">
+    <h3>Describe a frame pair for analysis</h3>
+    <div class="input-pair">
+      <div>
+        <label class="field-label">FRAME A (before cut)</label>
+        <textarea id="frame-a" placeholder="e.g. Actor sitting at desk, coffee cup in right hand, morning light from window...">Actor at dinner table, wine glass full, candle burning bright, evening light</textarea>
+      </div>
+      <div>
+        <label class="field-label">FRAME B (after cut)</label>
+        <textarea id="frame-b" placeholder="e.g. Same actor, coffee cup now in left hand, same lighting...">Same table moments later, wine glass half empty, candle noticeably shorter</textarea>
+      </div>
+    </div>
+    <button class="btn" id="analyze-btn">Run analysis →</button>
+    <div id="custom-result" style="margin-top: 18px;"></div>
+  </div>
+
+  <div class="api-note">
+    <strong>◆ API Endpoints:</strong> &nbsp;
+    <code>GET /demo/report</code> returns the full pre-analyzed episode &nbsp;·&nbsp;
+    <code>POST /analyze/pair</code> takes <code>{frame_a_desc, frame_b_desc, shot_index}</code> &nbsp;·&nbsp;
+    <code>GET /health</code> returns service status<br/>
+    Default URL: <strong>http://127.0.0.1:8006</strong> &nbsp;·&nbsp;
+    Run with <code>uvicorn apps.api.main:app --reload --port 8006</code>
+  </div>
+</main>
+
+<script>
+  const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://127.0.0.1:8006'
+    : window.location.origin;
+
+  // Demo report fallback (works without API running, for static GitHub Pages)
+  const DEMO_FALLBACK = {
+    total_shots: 10, total_errors: 11, high_errors: 6, medium_errors: 3, low_errors: 2,
+    auto_fixable: 9, avg_match_score: 77.7, estimated_hours_saved: 5,
+    cost_savings_estimate: 1000,
+    priority_shots: [2, 5, 6, 9],
+    shots: [
+      { shot_index: 0, timecode_a: "01:00:00:00", timecode_b: "01:00:12:12", match_score: 84, errors: [], summary: "Clean shot pair — no continuity errors detected.", auto_fixable_count: 0, high_count: 0, medium_count: 0, low_count: 0 },
+      { shot_index: 1, timecode_a: "01:00:08:00", timecode_b: "01:00:20:12", match_score: 72, errors: [{ type: "lighting", severity: "medium", description: "Shadow direction inconsistent with established sun position (~40 degrees off)", fixable: true, fix_suggestion: "Relight pass to match previous shot direction" }], summary: "1 minor continuity drift(s) detected — manageable in edit.", auto_fixable_count: 1, high_count: 0, medium_count: 1, low_count: 0 },
+      { shot_index: 2, timecode_a: "01:00:16:00", timecode_b: "01:00:28:12", match_score: 48, errors: [{ type: "prop_state", severity: "high", description: "Whiskey glass fill level jumps from 40% to 80% across dialogue cut", fixable: true, fix_suggestion: "Digital paint to match fill level" }, { type: "costume", severity: "medium", description: "Jacket lapel folded differently across the cut", fixable: false, fix_suggestion: "Reshoot flagged; otherwise accept as drift" }], summary: "1 high-severity error(s) detected — priority for VFX patch queue.", auto_fixable_count: 1, high_count: 1, medium_count: 1, low_count: 0 },
+      { shot_index: 3, timecode_a: "01:00:24:00", timecode_b: "01:00:36:12", match_score: 89, errors: [], summary: "Clean shot pair — no continuity errors detected.", auto_fixable_count: 0, high_count: 0, medium_count: 0, low_count: 0 },
+      { shot_index: 4, timecode_a: "01:00:32:00", timecode_b: "01:00:44:12", match_score: 76, errors: [{ type: "other", severity: "low", description: "Minor hair drift across multi-day shoot detectable frame-by-frame", fixable: false, fix_suggestion: "Acceptable continuity drift" }], summary: "1 minor continuity drift(s) detected — manageable in edit.", auto_fixable_count: 0, high_count: 0, medium_count: 0, low_count: 1 },
+      { shot_index: 5, timecode_a: "01:00:40:00", timecode_b: "01:00:52:12", match_score: 42, errors: [{ type: "makeup", severity: "high", description: "Wound makeup missing on actor left arm in reverse angle", fixable: true, fix_suggestion: "Compositing restore wound detail" }, { type: "background_extra", severity: "high", description: "Background extra reappears in frame after exiting earlier in the same take", fixable: true, fix_suggestion: "Paint out extra in Frame B or composite clean plate" }], summary: "2 high-severity error(s) detected — priority for VFX patch queue.", auto_fixable_count: 2, high_count: 2, medium_count: 0, low_count: 0 },
+      { shot_index: 6, timecode_a: "01:00:48:00", timecode_b: "01:01:00:12", match_score: 51, errors: [{ type: "prop_state", severity: "high", description: "Coffee cup moved from right hand to left hand across cut", fixable: true, fix_suggestion: "Rotoscope cup to original position in Frame B" }, { type: "environmental", severity: "medium", description: "Rain visible on window in close-up, absent in matching wide shot", fixable: true, fix_suggestion: "Add digital rain layer to wide or remove from close-up" }, { type: "lighting", severity: "low", description: "Subtle color cast shift between wide and close-up coverage", fixable: true, fix_suggestion: "Color grade correction" }], summary: "1 high-severity error(s) detected — priority for VFX patch queue.", auto_fixable_count: 3, high_count: 1, medium_count: 1, low_count: 1 },
+      { shot_index: 7, timecode_a: "01:00:56:00", timecode_b: "01:01:08:12", match_score: 88, errors: [], summary: "Clean shot pair — no continuity errors detected.", auto_fixable_count: 0, high_count: 0, medium_count: 0, low_count: 0 },
+      { shot_index: 8, timecode_a: "01:01:04:00", timecode_b: "01:01:16:12", match_score: 81, errors: [{ type: "screen_direction", severity: "medium", description: "Character exits frame left then enters frame left in next shot (crosses the line)", fixable: false, fix_suggestion: "Editorial decision: accept or flip shot" }], summary: "1 minor continuity drift(s) detected — manageable in edit.", auto_fixable_count: 0, high_count: 0, medium_count: 1, low_count: 0 },
+      { shot_index: 9, timecode_a: "01:01:12:00", timecode_b: "01:01:24:12", match_score: 38, errors: [{ type: "background_extra", severity: "high", description: "Background extra reappears in frame after exiting earlier in the same take", fixable: true, fix_suggestion: "Paint out extra in Frame B or composite clean plate" }, { type: "screen_direction", severity: "medium", description: "Character exits frame left then enters frame left in next shot (crosses the line)", fixable: false, fix_suggestion: "Editorial decision: accept or flip shot" }], summary: "1 high-severity error(s) detected — priority for VFX patch queue.", auto_fixable_count: 1, high_count: 1, medium_count: 1, low_count: 0 },
+    ]
+  };
+
+  const TYPE_LABELS = {
+    prop_state:"Prop / Object state", lighting:"Lighting & shadows",
+    costume:"Costume / wardrobe", background_extra:"Background / extras",
+    makeup:"Makeup & wounds", environmental:"Environmental match",
+    screen_direction:"Screen direction", other:"Other",
+  };
+
+  let report = null;
+  let selected = 0;
+
+  async function loadReport() {
+    try {
+      const r = await fetch(API + '/demo/report');
+      if (!r.ok) throw new Error('API not available');
+      report = await r.json();
+    } catch (e) {
+      console.log('Using static demo fallback (API not running)');
+      report = DEMO_FALLBACK;
+    }
+    renderStats();
+    renderShotList();
+    selectShot(0);
+  }
+
+  function renderStats() {
+    document.getElementById('stat-shots').textContent = report.total_shots;
+    document.getElementById('stat-errors').textContent = report.total_errors;
+    document.getElementById('stat-high').textContent = report.high_errors;
+    document.getElementById('stat-fixable').textContent = report.auto_fixable;
+    document.getElementById('stat-score').textContent = report.avg_match_score + '%';
+    document.getElementById('stat-hours').textContent = '~' + report.estimated_hours_saved + 'h';
+  }
+
+  function renderShotList() {
+    const list = document.getElementById('shot-list');
+    list.innerHTML = report.shots.map((s, i) => {
+      const flags = [];
+      if (s.high_count > 0) flags.push(`<span class="flag high">${s.high_count} HIGH</span>`);
+      if (s.medium_count > 0) flags.push(`<span class="flag med">${s.medium_count} MED</span>`);
+      if (s.low_count > 0) flags.push(`<span class="flag low">${s.low_count} LOW</span>`);
+      if (flags.length === 0) flags.push(`<span class="flag clean">✓ CLEAN</span>`);
+      const scoreColor = s.match_score >= 80 ? 'var(--green)' : s.match_score >= 60 ? 'var(--amber)' : 'var(--red)';
+      return `
+        <div class="shot-row ${selected === i ? 'selected' : ''}" onclick="selectShot(${i})">
+          <div>
+            <div class="shot-num">SHOT ${i + 1}</div>
+            <div class="shot-tc">${s.timecode_a}</div>
+          </div>
+          <div class="shot-body">${s.summary}</div>
+          <div class="shot-score" style="color:${scoreColor}">${s.match_score}%</div>
+          <div class="shot-flags">${flags.join('')}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function selectShot(i) {
+    selected = i;
+    renderShotList();
+    const s = report.shots[i];
+    const panel = document.getElementById('detail-panel');
+    const scoreColor = s.match_score >= 80 ? 'var(--green)' : s.match_score >= 60 ? 'var(--amber)' : 'var(--red)';
+    const circ = 2 * Math.PI * 22;
+    const offset = circ * (1 - s.match_score / 100);
+
+    let content = `
+      <div class="detail-head">
+        <div class="score-ring">
+          <svg width="60" height="60">
+            <circle cx="30" cy="30" r="22" fill="none" stroke="var(--border)" stroke-width="4"/>
+            <circle cx="30" cy="30" r="22" fill="none" stroke="${scoreColor}" stroke-width="4"
+                    stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+          </svg>
+          <div class="val" style="color:${scoreColor}">${s.match_score}</div>
+        </div>
+        <div style="flex:1">
+          <div class="detail-title">SHOT ${i + 1} · ${s.timecode_a} → ${s.timecode_b}</div>
+          <div class="detail-summary">${s.summary}</div>
+        </div>
+      </div>`;
+
+    if (s.errors.length === 0) {
+      content += `<div class="clean-state"><div class="icon" style="color:var(--green)">✓</div>No continuity errors detected — this shot pair is clean.</div>`;
+    } else {
+      const byType = {};
+      s.errors.forEach(e => { if (!byType[e.type]) byType[e.type] = []; byType[e.type].push(e); });
+      content += `<div class="detail-body">`;
+      for (const [type, errs] of Object.entries(byType)) {
+        content += `<div class="error-group">
+          <div class="error-group-label">◆ ${TYPE_LABELS[type] || type} (${errs.length})</div>`;
+        errs.forEach(err => {
+          content += `
+            <div class="error-item ${err.severity}">
+              <div class="dot ${err.severity}"></div>
+              <div class="error-content">
+                <div class="error-badges">
+                  <span class="badge" style="color:var(--${err.severity === 'high' ? 'red' : err.severity === 'medium' ? 'amber' : 'green'}); border-color:var(--${err.severity === 'high' ? 'red' : err.severity === 'medium' ? 'amber' : 'green'})">${err.severity}</span>
+                  ${err.fixable ? '<span class="badge badge-fixable">auto-fixable</span>' : ''}
+                </div>
+                <div class="error-desc">${err.description}</div>
+                ${err.fix_suggestion ? `<div class="error-fix">Fix: ${err.fix_suggestion}</div>` : ''}
+              </div>
+            </div>`;
+        });
+        content += `</div>`;
+      }
+      content += `</div>`;
+    }
+    panel.innerHTML = content;
+  }
+
+  document.getElementById('analyze-btn').addEventListener('click', async () => {
+    const a = document.getElementById('frame-a').value.trim();
+    const b = document.getElementById('frame-b').value.trim();
+    const btn = document.getElementById('analyze-btn');
+    const out = document.getElementById('custom-result');
+    if (!a || !b) return;
+    btn.disabled = true; btn.textContent = 'Analyzing…';
+    try {
+      const r = await fetch(API + '/analyze/pair', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ frame_a_desc: a, frame_b_desc: b, shot_index: 99 })
+      });
+      if (!r.ok) throw new Error('API not running');
+      const result = await r.json();
+      report.shots = [...report.shots, result];
+      report.total_shots++;
+      report.total_errors += result.errors.length;
+      report.high_errors += result.high_count;
+      renderStats();
+      renderShotList();
+      selectShot(report.shots.length - 1);
+      document.getElementById('shot-list').scrollTop = 999999;
+      out.innerHTML = `<div style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px">✓ Added as shot ${report.shots.length} — scroll up to view.</div>`;
+    } catch (e) {
+      out.innerHTML = `<div style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.7">⚠ API not running. Start it with: <code style="background:var(--surface);padding:2px 6px">uvicorn apps.api.main:app --port 8006</code></div>`;
+    } finally {
+      btn.disabled = false; btn.textContent = 'Run analysis →';
+    }
+  });
+
+  loadReport();
+</script>
+</body>
+</html>

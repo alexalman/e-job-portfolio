@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Live Ads Personalization Engine — Real-Time Slot Planning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--red); }
+  .control-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: flex-end; }
+  @media (max-width: 700px) { .control-row { grid-template-columns: 1fr; } }
+
+  .broadcast {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    margin-top: 22px; overflow: hidden;
+  }
+  .broadcast-head {
+    padding: 16px 22px; background: linear-gradient(90deg, rgba(224,92,106,0.12), transparent);
+    border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .broadcast-live {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--red); letter-spacing: 0.15em;
+  }
+  .broadcast-live::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--red);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  .broadcast-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .broadcast-meta span { color: var(--text); }
+
+  .timeline {
+    padding: 18px 22px; position: relative;
+  }
+  .timeline-bar {
+    height: 4px; background: var(--border); border-radius: 2px; position: relative; margin-bottom: 24px;
+  }
+  .timeline-bar .filled {
+    position: absolute; left: 0; top: 0; height: 100%; width: 35%;
+    background: var(--red); border-radius: 2px;
+  }
+  .timeline-marker {
+    position: absolute; top: -6px; width: 3px; height: 16px; background: var(--red);
+  }
+
+  .slots-list { display: flex; flex-direction: column; gap: 10px; }
+  .slot {
+    background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--red);
+    border-radius: 4px; padding: 16px 20px; display: grid;
+    grid-template-columns: 70px 1fr auto; gap: 18px; align-items: center;
+  }
+  @media (max-width: 700px) { .slot { grid-template-columns: 70px 1fr; } .slot .cta-col { grid-column: 1 / -1; } }
+  .slot-num {
+    font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; color: var(--red);
+    line-height: 1; text-align: center;
+  }
+  .slot-moment { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .slot-brand { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .slot-creative { font-size: 13px; color: var(--text); margin-bottom: 6px; line-height: 1.5; }
+  .slot-rationale { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); font-style: italic; line-height: 1.7; }
+  .cta-col {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--red);
+    border: 1px solid var(--red); padding: 6px 12px; border-radius: 2px;
+    text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap;
+  }
+
+  .forecast-panel {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px; margin-top: 24px; overflow: hidden;
+  }
+  .forecast-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+  @media (max-width: 700px) { .forecast-grid { grid-template-columns: repeat(2, 1fr); } }
+  .fc-stat { background: var(--card); padding: 18px; text-align: center; }
+  .fc-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 6px; text-transform: uppercase; }
+  .fc-val { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--red); }
+  .fc-note { padding: 16px 22px; font-size: 13px; color: var(--text); line-height: 1.7; font-style: italic; border-top: 1px solid var(--border); }
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 06 · LIVE ADS ENGINE</div>
+    <div class="proj-brand-title">Live Ads Engine<span style="color:var(--red)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Real-time · Audience segmentation · Creative rotation</div>
+  <h1>Ad slot planning for <em>live events</em>,<br/>built for the Paramount+ sports tier.</h1>
+  <p>Generates a full ad slot plan for different audience segments and broadcast contexts. Creative variants and pacing change <strong>in real time</strong> based on segment relevance and fatigue control — critical for <strong>Paramount's NFL and UEFA live sports</strong> monetization strategy.</p>
+</section>
+
+<main class="proj-main">
+  <div class="proj-section-title">— Broadcast context</div>
+
+  <div class="proj-card">
+    <div class="control-row">
+      <div>
+        <label class="proj-label">AUDIENCE SEGMENT</label>
+        <select id="segment" class="proj-select">
+          <option value="sports fans">Sports fans</option>
+          <option value="parents">Parents</option>
+          <option value="young adults">Young adults</option>
+          <option value="luxury shoppers">Luxury shoppers</option>
+        </select>
+      </div>
+      <div>
+        <label class="proj-label">LIVE CONTEXT</label>
+        <select id="context" class="proj-select">
+          <option value="live sports">Live sports (NFL/UEFA)</option>
+          <option value="awards broadcast">Awards broadcast</option>
+          <option value="breaking news">Breaking news</option>
+          <option value="reality TV finale">Reality TV finale</option>
+        </select>
+      </div>
+      <button class="proj-btn" onclick="simulate()">Simulate →</button>
+    </div>
+  </div>
+
+  <div id="results">
+    <div class="empty">Choose an audience segment and live context, then simulate.</div>
+  </div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>GET /simulate?segment=SEGMENT&amp;context=CONTEXT&amp;slots=5</code>
+    → returns planned slots + forecast metrics<br/>
+    Default URL: <strong>http://127.0.0.1:8003</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8003</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8003';
+
+const ADS_BY_SEGMENT = {
+  "sports fans":     [{brand:"Orbit Shoes",creative:"High-energy performance spot",cta:"Shop game-day drop"}],
+  "parents":         [{brand:"CalmTea",creative:"Relaxing family reset spot",cta:"Try the sleep blend"}],
+  "young adults":    [{brand:"Pixel Mobile",creative:"Fast-cut creator phone ad",cta:"Upgrade today"}],
+  "luxury shoppers": [{brand:"Atlas Travel",creative:"Premium getaway montage",cta:"Book exclusive offer"}],
+};
+
+function fallbackPlan(segment, context, slots=5) {
+  const eligible = ADS_BY_SEGMENT[segment] || ADS_BY_SEGMENT["sports fans"];
+  const plan = [];
+  for (let i = 1; i <= slots; i++) {
+    const ad = eligible[(i - 1) % eligible.length];
+    plan.push({
+      slot: i,
+      moment: `${context} break ${i}`,
+      brand: ad.brand,
+      creative: ad.creative,
+      cta: ad.cta,
+      rationale: `Selected for ${segment} during ${context} based on contextual relevance and fatigue control.`
+    });
+  }
+  return {
+    segment, context, slots: plan,
+    forecast: {
+      attention_index: "118",
+      predicted_recall: "31%",
+      frequency_cap: 2,
+      summary: `This plan prioritizes relevance for ${segment} while rotating creatives to reduce repetition during ${context}.`
+    }
+  };
+}
+
+async function simulate() {
+  const segment = document.getElementById('segment').value;
+  const context = document.getElementById('context').value;
+  const results = document.getElementById('results');
+  results.innerHTML = '<div class="empty">Planning slots…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/simulate?segment=${encodeURIComponent(segment)}&context=${encodeURIComponent(context)}&slots=5`);
+    if (!r.ok) throw new Error('api');
+    data = await r.json();
+  } catch (e) {
+    offline = true;
+    data = fallbackPlan(segment, context);
+  }
+
+  const slotPositions = [15, 32, 50, 68, 85];
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:0.08em">⚠ API offline — showing static plan fallback</div>' : ''}
+
+    <div class="broadcast">
+      <div class="broadcast-head">
+        <div class="broadcast-live">● LIVE</div>
+        <div class="broadcast-meta">
+          SEGMENT: <span>${data.segment}</span> &nbsp;·&nbsp;
+          CONTEXT: <span>${data.context}</span> &nbsp;·&nbsp;
+          ${data.slots.length} ad slots planned
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-bar">
+          <div class="filled"></div>
+          ${slotPositions.map(p => `<div class="timeline-marker" style="left:${p}%"></div>`).join('')}
+        </div>
+        <div class="slots-list">
+          ${data.slots.map(s => `
+            <div class="slot">
+              <div class="slot-num">0${s.slot}</div>
+              <div>
+                <div class="slot-moment">◆ ${s.moment.toUpperCase()}</div>
+                <div class="slot-brand">${s.brand}</div>
+                <div class="slot-creative">${s.creative}</div>
+                <div class="slot-rationale">${s.rationale}</div>
+              </div>
+              <div class="cta-col">${s.cta}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-section-title">— Campaign forecast</div>
+    <div class="forecast-panel">
+      <div class="forecast-grid">
+        <div class="fc-stat">
+          <div class="fc-lbl">Attention Index</div>
+          <div class="fc-val">${data.forecast.attention_index}</div>
+        </div>
+        <div class="fc-stat">
+          <div class="fc-lbl">Predicted Recall</div>
+          <div class="fc-val">${data.forecast.predicted_recall}</div>
+        </div>
+        <div class="fc-stat">
+          <div class="fc-lbl">Frequency Cap</div>
+          <div class="fc-val">${data.forecast.frequency_cap}x</div>
+        </div>
+        <div class="fc-stat">
+          <div class="fc-lbl">Slots Planned</div>
+          <div class="fc-val">${data.slots.length}</div>
+        </div>
+      </div>
+      <div class="fc-note">"${data.forecast.summary}"</div>
+    </div>
+  `;
+}
+
+simulate();
+</script>
+</body>
+</html>

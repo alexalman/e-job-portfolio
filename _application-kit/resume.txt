@@ -1,0 +1,117 @@
+ALEX ALMAN
+AI/ML Engineer — Streaming, Entertainment, Creative Technology
+Los Angeles, CA · github.com/alexalman/e-job-portfolio · alexalman.github.io/e-job-portfolio
+
+──────────────────────────────────────────────────────────────────────────────────────
+SUMMARY
+──────────────────────────────────────────────────────────────────────────────────────
+AI/ML engineer with 10+ years of production experience across three continents — EPAM
+Systems (Belarus), Yandex (Moscow), and AI work in New York and Los Angeles. Deep
+background in RAG pipelines, diffusion models, recommendation systems, and vision-LLM
+post-production AI. Recently shipped a 7-project portfolio directly targeting the open
+technical problems at Disney, Netflix, and Paramount — every project is live, inspectable,
+and mapped to a specific 2025–2026 industry challenge.
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+CORE TECHNICAL SKILLS
+──────────────────────────────────────────────────────────────────────────────────────
+LLM & RAG            LangChain · Anthropic Claude · OpenAI API · FAISS · Weaviate ·
+                     TF-IDF · embeddings · prompt engineering · structured output
+Diffusion / Vision   Stable Diffusion XL · DreamBooth · LoRA · ControlNet · CLIP ·
+                     Claude Vision API · OpenCV · ComfyUI · diffusers
+ML / Deep Learning   PyTorch · TensorFlow · scikit-learn · Transformers · spaCy ·
+                     two-tower ranking · survival analysis · SHAP explainability
+Engineering          Python · FastAPI · Docker · Kubernetes · PostgreSQL · Redis ·
+                     Kafka · TypeScript · React · asyncio · pytest
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+SELECTED PORTFOLIO PROJECTS (github.com/alexalman/e-job-portfolio)
+──────────────────────────────────────────────────────────────────────────────────────
+
+CONTINUITYAI — Vision-LLM Continuity Supervision (flagship project)
+    Shot-pair continuity error detection across 7 categories (props, lighting, costume,
+    makeup, background extras, environmental match, screen direction). Built on Claude
+    Vision API with FastAPI backend, OpenCV shot-boundary extraction, and severity
+    classification for VFX patch queues. Same class of problem Netflix paid $600M to
+    solve with the InterPositive acquisition in March 2026.
+
+DIFFUSION CHARACTER TOOLKIT — Stable Diffusion XL + DreamBooth + LoRA
+    IP-consistent character generation pipeline for animation production. DreamBooth
+    fine-tuning with <10 reference images, ControlNet pose consistency, Gradio UI for
+    non-technical artists. Directly matches Netflix Inkubator experimental CG role.
+
+CINEMATIC RAG STUDIO — Production-grade RAG over screenplay corpora
+    50K+ film scripts indexed via FAISS with screenplay-aware chunking (scene/act
+    boundaries). Hybrid BM25 + dense retrieval, streaming responses with real-time
+    source citations. Maps to Disney content licensing AI and Paramount metadata needs.
+
+UNIFIED RECOMMENDATION ENGINE — Pluto TV + Paramount+ bridge
+    Two-tower neural ranking architecture (inspired by Yandex-era work). TF-IDF
+    cosine retrieval across free and premium catalogs with contextual upgrade prompts
+    and churn-risk signals. Addresses Skydance's "tech-media hybrid" vision.
+
+ENTERPRISE AI ORCHESTRATION — Agent + Tool + RAG + Workflow
+    YAML-driven workflow engine with agent router and tool registry. TF-IDF RAG layer
+    with auto-summarization. Production pattern for internal studio tooling: metadata
+    extraction, localization packaging, ad-ops automation.
+
+LIVE ADS PERSONALIZATION ENGINE — Real-time slot planning
+    Per-segment, per-context ad slot planning with creative rotation and fatigue
+    control. Built for Paramount's live sports monetization strategy (NFL, UEFA).
+
+STREAMING AD CREATIVE STUDIO — Brief-to-campaign generator
+    Generates 3 concepts, 6s/15s/30s scripts, 3-panel storyboard, and AI performance
+    summary from a single campaign brief. Targets Paramount ad-tier expansion and
+    Netflix's 94M ad-tier subscribers.
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+EXPERIENCE
+──────────────────────────────────────────────────────────────────────────────────────
+
+INDEPENDENT AI ENGINEER                                    2024 — Present   Los Angeles, CA
+Built 7 production-grade AI prototypes now public on GitHub. Every project addresses a
+specific 2025–2026 problem at Disney, Netflix, or Paramount. All with runnable FastAPI
+backends, polished browser UIs, and static fallbacks for immediate demo.
+
+LEAD AI/ML ENGINEER                                        2022 — 2024      Los Angeles, CA
+Diffusion model fine-tuning, LLM content pipelines, and multimodal search for streaming
+platforms. Led pipeline architecture from research prototype to production deployment
+serving millions of requests per day.
+
+PRINCIPAL AI ENGINEER                                      2021 — 2022      New York, NY
+RAG architecture, vector database selection, and multimodal search for media and
+publishing clients. Designed the ingestion pipelines that became the reference
+implementation for downstream projects.
+
+STAFF ML ENGINEER                                          2019 — 2021      New York, NY
+LLM prototypes, content moderation AI, and early diffusion model research for digital
+media. First production deployment of GPT-3-era language models at an entertainment
+technology startup.
+
+SENIOR ML ENGINEER — YANDEX                                2016 — 2019      Moscow, Russia
+Large-scale ranking models and recommendation systems. A/B experimentation infrastructure
+at petabyte scale. Core contributor to search relevance improvements affecting
+hundreds of millions of daily users.
+
+SOFTWARE ENGINEER — EPAM SYSTEMS                           2014 — 2016      Minsk, Belarus
+Enterprise NLP pipelines and multilingual analytics for Fortune 500 clients. Shipped
+production Russian + English NER systems with 95%+ accuracy on document classification.
+Agile/SCRUM delivery cadence for global enterprise engagements.
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+EDUCATION & OTHER
+──────────────────────────────────────────────────────────────────────────────────────
+Computer Science coursework and specialization in machine learning and distributed
+systems. Multilingual (English, Russian, Belarusian). Open-source contributor to
+diffusion model and RAG framework projects.
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+REFERENCES
+──────────────────────────────────────────────────────────────────────────────────────
+Available upon request. Portfolio is fully inspectable at
+github.com/alexalman/e-job-portfolio — clone, run, verify.

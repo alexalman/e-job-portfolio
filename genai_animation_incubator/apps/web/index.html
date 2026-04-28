@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>GenAI Animation Incubator — Prompt to Animatic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/_shared/styles.css" />
+<style>
+  .proj-brand-sub, .proj-eyebrow { color: var(--violet); }
+
+  .generator-row { display: flex; gap: 10px; margin-bottom: 8px; }
+  .generator-row input { flex: 1; }
+
+  .quick-prompts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+  .quick-prompts .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .quick-prompts button {
+    background: transparent; border: 1px solid var(--border-2); color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    padding: 5px 12px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+  }
+  .quick-prompts button:hover { border-color: var(--violet); color: var(--violet); }
+
+  .pipeline-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 6px;
+    overflow: hidden; margin: 22px 0;
+  }
+  .pipeline-step {
+    background: var(--card); padding: 16px 14px; text-align: center; position: relative;
+  }
+  .pipeline-step.done { background: rgba(159,138,234,0.08); }
+  .pipeline-step.active { background: rgba(159,138,234,0.16); }
+  .pipeline-step .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--violet);
+    letter-spacing: 0.1em; margin-bottom: 4px;
+  }
+  .pipeline-step .lbl { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .pipeline-step .desc { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+
+  .script-panel {
+    background: linear-gradient(135deg, rgba(159,138,234,0.08), rgba(159,138,234,0.02));
+    border: 1px solid var(--violet); border-radius: 6px; padding: 22px 26px; margin-bottom: 18px;
+  }
+  .script-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--violet); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .script-text { font-family: 'Fraunces', serif; font-size: 16px; line-height: 1.8; font-style: italic; }
+  .run-id {
+    float: right; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted);
+    background: var(--surface); padding: 2px 8px; border-radius: 2px; border: 1px solid var(--border);
+  }
+
+  .shot-list {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 18px;
+  }
+  .shot-list-head { padding: 14px 20px; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .shot-row {
+    padding: 14px 20px; display: grid; grid-template-columns: 50px 1fr; gap: 16px; align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .shot-row:last-child { border-bottom: none; }
+  .shot-row:hover { background: rgba(159,138,234,0.04); }
+  .shot-row .num {
+    font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; color: var(--violet);
+    line-height: 1; text-align: center;
+  }
+  .shot-row .desc { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+  .animatic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .frame-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    overflow: hidden; transition: all 0.2s;
+  }
+  .frame-card:hover { border-color: var(--violet); transform: translateY(-2px); }
+  .frame-preview {
+    aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 48px; font-weight: 600; color: white;
+    position: relative; overflow: hidden;
+  }
+  .frame-preview .shot-label {
+    position: absolute; top: 12px; left: 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    background: rgba(0,0,0,0.4); color: white; padding: 3px 9px; border-radius: 2px; letter-spacing: 0.08em;
+  }
+  .frame-card .caption {
+    padding: 12px 16px; font-size: 12px; color: var(--text); line-height: 1.6;
+    border-top: 1px solid var(--border); background: var(--surface);
+  }
+  .note-panel {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--violet);
+    border-radius: 4px; padding: 14px 20px; margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.75;
+  }
+  .note-panel strong { color: var(--violet); }
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<header class="proj-header">
+  <div>
+    <div class="proj-brand-sub">PROJECT 03 · ANIMATION INCUBATOR</div>
+    <div class="proj-brand-title">GenAI Animation Incubator<span style="color:var(--violet)">.</span></div>
+  </div>
+  <a href="/" class="proj-back">← ALL PROJECTS</a>
+</header>
+
+<section class="proj-hero">
+  <div class="proj-eyebrow">Prompt → script → shot list → animatic frames</div>
+  <h1>A <em>creative production pipeline</em><br/>for the Netflix Inkubator era.</h1>
+  <p>Complete prompt-to-animatic flow: script generation, shot planning, and visual previews. Designed for <strong>Netflix's experimental CG artist workflow</strong> with diffusion model swap-points — the base generator can be upgraded to Stable Diffusion XL, ControlNet, or DreamBooth character LoRAs without changing the pipeline.</p>
+</section>
+
+<main class="proj-main">
+  <div class="proj-section-title">— Prompt input</div>
+
+  <div class="proj-card">
+    <div class="generator-row">
+      <input id="prompt" class="proj-input" value="A young inventor discovers a glowing crystal in the forest" placeholder="Describe the story you want to animate..." />
+      <button class="proj-btn" onclick="generate()">Generate →</button>
+    </div>
+    <div class="quick-prompts">
+      <span class="label">TRY:</span>
+      <button onclick="quickP('A space pirate steals a map that leads to a forgotten planet')">space pirate</button>
+      <button onclick="quickP('A robot learns to paint and falls in love with art')">robot artist</button>
+      <button onclick="quickP('A family of ocean creatures searches for a lost home')">ocean family</button>
+      <button onclick="quickP('A young witch must deliver a letter across an enchanted forest')">witch's journey</button>
+    </div>
+  </div>
+
+  <div id="results">
+    <div class="empty">Enter a prompt and generate to see the animation pipeline output.</div>
+  </div>
+
+  <div class="proj-api-note">
+    <strong>◆ API:</strong>
+    <code>POST /generate</code> with <code>{prompt}</code>
+    → returns script, shot list, and animatic frame paths (PNG files saved server-side)<br/>
+    Default URL: <strong>http://127.0.0.1:8005</strong> &nbsp;·&nbsp;
+    Run: <code>uvicorn apps.api.main:app --reload --port 8005</code>
+  </div>
+</main>
+
+<script>
+const API = 'http://127.0.0.1:8005';
+
+function fallbackGenerate(prompt) {
+  const runId = Math.random().toString(36).substring(2, 10);
+  const script = `${prompt}. The main character enters a new world, faces a challenge, finds an unexpected ally, and ends with a visually memorable payoff.`;
+  const parts = script.split(/[,.]/).map(p => p.trim()).filter(Boolean).slice(0, 4);
+  const shots = parts.map(p => `Illustrate: ${p}`);
+  return {
+    run_id: runId,
+    script,
+    shots,
+    frames: shots.map((_, i) => `outputs/${runId}/frame_${i+1}.png`),
+    note: 'Frames are placeholders designed for portfolio demos and can be replaced with diffusion outputs later.'
+  };
+}
+
+function quickP(p) { document.getElementById('prompt').value = p; generate(); }
+
+const FRAME_GRADIENTS = [
+  'linear-gradient(135deg, #4a2c6d 0%, #9f8aea 100%)',
+  'linear-gradient(135deg, #1a4d5c 0%, #43d9ad 100%)',
+  'linear-gradient(135deg, #7a3a1f 0%, #f0a030 100%)',
+  'linear-gradient(135deg, #3c1a4d 0%, #c8a96e 100%)',
+];
+
+async function generate() {
+  const prompt = document.getElementById('prompt').value.trim();
+  if (!prompt) return;
+  const results = document.getElementById('results');
+  results.innerHTML = '<div class="empty">Running pipeline: script → shots → animatic…</div>';
+
+  let data, offline = false;
+  try {
+    const r = await fetch(`${API}/generate`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({prompt}) });
+    if (!r.ok) throw new Error('api');
+    data = await r.json();
+  } catch (e) {
+    offline = true;
+    data = fallbackGenerate(prompt);
+  }
+
+  results.innerHTML = `
+    ${offline ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:0.08em">⚠ API offline — simulated pipeline output</div>' : ''}
+
+    <div class="pipeline-bar">
+      <div class="pipeline-step done">
+        <div class="num">◆ 01</div>
+        <div class="lbl">Prompt</div>
+        <div class="desc">Story seed</div>
+      </div>
+      <div class="pipeline-step done">
+        <div class="num">◆ 02</div>
+        <div class="lbl">Script</div>
+        <div class="desc">LLM expansion</div>
+      </div>
+      <div class="pipeline-step done">
+        <div class="num">◆ 03</div>
+        <div class="lbl">Shot plan</div>
+        <div class="desc">${data.shots.length} shots</div>
+      </div>
+      <div class="pipeline-step done">
+        <div class="num">◆ 04</div>
+        <div class="lbl">Animatic</div>
+        <div class="desc">${data.frames.length} frames</div>
+      </div>
+    </div>
+
+    <div class="proj-section-title">— Generated script</div>
+    <div class="script-panel">
+      <span class="run-id">run: ${data.run_id}</span>
+      <div class="script-label">◆ SCRIPT · EXPANDED FROM PROMPT</div>
+      <div class="script-text">"${data.script}"</div>
+    </div>
+
+    <div class="proj-section-title">— Shot list</div>
+    <div class="shot-list">
+      <div class="shot-list-head">◆ ${data.shots.length} SHOTS PLANNED</div>
+      ${data.shots.map((shot, i) => `
+        <div class="shot-row">
+          <div class="num">0${i+1}</div>
+          <div class="desc">${shot}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="proj-section-title">— Animatic preview</div>
+    <div class="animatic-grid">
+      ${data.shots.map((shot, i) => {
+        const bg = FRAME_GRADIENTS[i % FRAME_GRADIENTS.length];
+        return `
+          <div class="frame-card">
+            <div class="frame-preview" style="background: ${bg}">
+              <div class="shot-label">SHOT ${String(i+1).padStart(2, '0')}</div>
+              <span style="opacity: 0.35">0${i+1}</span>
+            </div>
+            <div class="caption">${shot.replace('Illustrate: ', '')}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
+    <div class="note-panel">
+      <strong>◆ PRODUCTION NOTE:</strong> ${data.note || 'Frames shown are deterministic placeholder previews. In production, swap the make_frames() function for Stable Diffusion XL inference with a character-consistency LoRA to produce final visuals.'}
+    </div>
+  `;
+}
+
+generate();
+</script>
+</body>
+</html>
