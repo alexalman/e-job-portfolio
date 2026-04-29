@@ -3,38 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aleg Alman — Senior AI/ML Engineer building production GenAI systems for streaming, entertainment, and creative technology. 7 working demos. Available now in Burbank, CA." />
+  <meta name="description" content="Aleg 'Alex' Alman — AI Product Architect & Creative Technologist. Streaming AI · Recommendation Systems · Generative AI. Available now in Los Angeles." />
   <meta name="theme-color" content="#0e1116" />
-  <title>Aleg Alman — Senior AI/ML Engineer · Available Now · Burbank, CA</title>
+  <title>Aleg Alman — AI Product Architect &amp; Creative Technologist · Los Angeles</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ──────────────────────────────────────────────────────────────────
-       DESIGN TOKENS
-       Optimized for executive credibility — calm, premium, confident.
-       Color story: deep ink + cream + a single warm gold accent.
-    ────────────────────────────────────────────────────────────────── */
     :root {
-      --bg:           #fafaf7;     /* warm cream — primary canvas */
-      --bg-elev:      #ffffff;     /* card surface */
-      --bg-deep:      #0e1116;     /* hero ink (high contrast) */
-      --bg-deep-2:    #1a1f28;     /* deep secondary */
-      --ink:          #0e1116;     /* primary text on light */
-      --ink-2:        #2c333d;     /* secondary text */
-      --ink-3:        #5a6470;     /* muted */
-      --ink-4:        #8b95a3;     /* subtle */
-      --line:         #e8e6df;     /* divider */
-      --line-2:       #d8d4c9;     /* stronger divider */
-      --on-deep:      #f5f3ec;     /* text on dark */
-      --on-deep-2:    #b8bdc7;     /* muted on dark */
-      --gold:         #c08a3e;     /* primary accent — warm gold */
-      --gold-2:       #a87328;     /* gold pressed */
-      --gold-soft:    #f5ecdc;     /* gold tint background */
-      --green:        #2d7a4f;     /* "available" indicator */
-      --red:          #b54545;     /* urgency accent (used sparingly) */
+      --bg:           #fafaf7;
+      --bg-elev:      #ffffff;
+      --bg-deep:      #0e1116;
+      --bg-deep-2:    #1a1f28;
+      --ink:          #0e1116;
+      --ink-2:        #2c333d;
+      --ink-3:        #5a6470;
+      --ink-4:        #8b95a3;
+      --line:         #e8e6df;
+      --line-2:       #d8d4c9;
+      --on-deep:      #f5f3ec;
+      --on-deep-2:    #b8bdc7;
+      --gold:         #c08a3e;
+      --gold-2:       #a87328;
+      --gold-soft:    #f5ecdc;
+      --green:        #2d7a4f;
+      --green-light:  #5fc88a;
+      --red:          #b54545;
+      --blue:         #4a90c9;
+      --violet:       #8b6ec4;
+      --amber:        #d99a2b;
       --shadow-sm:    0 1px 2px rgba(14,17,22,0.04), 0 1px 1px rgba(14,17,22,0.04);
       --shadow:       0 4px 12px rgba(14,17,22,0.06), 0 1px 3px rgba(14,17,22,0.04);
       --shadow-lg:    0 16px 48px rgba(14,17,22,0.12), 0 4px 12px rgba(14,17,22,0.06);
@@ -43,7 +42,7 @@
       --radius-lg:    12px;
       --radius-xl:    20px;
       --serif:        'Instrument Serif', 'Times New Roman', serif;
-      --sans:         'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --sans:         'Inter', -apple-system, system-ui, sans-serif;
       --mono:         'JetBrains Mono', ui-monospace, monospace;
     }
 
@@ -56,29 +55,20 @@
       font-size: 16px;
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    img { max-width: 100%; display: block; }
-
     ::selection { background: var(--gold); color: var(--on-deep); }
 
-    /* ──────────────────────────────────────────────────────────────────
-       LAYOUT PRIMITIVES
-    ────────────────────────────────────────────────────────────────── */
     .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
     @media (max-width: 768px) { .container { padding: 0 20px; } }
 
-    /* ──────────────────────────────────────────────────────────────────
-       HEADER — sticky, persistent contact access
-    ────────────────────────────────────────────────────────────────── */
+    /* HEADER */
     .nav {
       position: sticky; top: 0; z-index: 50;
       background: rgba(250,250,247,0.85);
       backdrop-filter: saturate(180%) blur(12px);
-      -webkit-backdrop-filter: saturate(180%) blur(12px);
       border-bottom: 1px solid transparent;
       transition: border-color 0.25s, background 0.25s;
     }
@@ -101,27 +91,23 @@
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-family: var(--serif); font-style: italic; font-size: 18px;
-      font-weight: 400;
     }
-    .brand-name { color: var(--ink); }
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .nav-phone {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: 13px; font-weight: 500;
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 12px; font-weight: 500;
       color: var(--ink-2); padding: 8px 12px; border-radius: var(--radius);
       transition: color 0.15s, background 0.15s;
     }
-    .nav-phone:hover { color: var(--ink); background: var(--gold-soft); }
-    .nav-phone .icon { font-size: 14px; }
+    .nav-link:hover { color: var(--ink); background: var(--gold-soft); }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .nav-inner { padding: 12px 20px; }
-      .brand-name-text { display: none; }
-      .nav-phone-text { display: none; }
-      .nav-phone { padding: 8px; }
+      .brand-name-text, .nav-link-text { display: none; }
+      .nav-link { padding: 8px; }
     }
 
-    /* Buttons — strong, unmistakable, premium */
+    /* Buttons */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 12px 20px;
@@ -142,7 +128,7 @@
       background: var(--gold); color: white;
       border-color: var(--gold);
     }
-    .btn-gold:hover { background: var(--gold-2); border-color: var(--gold-2); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-gold:hover { background: var(--gold-2); transform: translateY(-1px); box-shadow: var(--shadow); }
     .btn-ghost {
       background: transparent; color: var(--ink);
       border-color: var(--line-2);
@@ -154,12 +140,8 @@
     }
     .btn-ghost-light:hover { background: rgba(245,243,236,0.08); border-color: rgba(245,243,236,0.6); }
     .btn-large { padding: 16px 28px; font-size: 15px; }
-    .btn-icon { font-size: 14px; line-height: 1; }
 
-    /* ──────────────────────────────────────────────────────────────────
-       HERO — answers the 4 scanning questions in <5 seconds
-       Who · Targeting · Why care · First click
-    ────────────────────────────────────────────────────────────────── */
+    /* HERO */
     .hero {
       background: var(--bg-deep);
       color: var(--on-deep);
@@ -190,14 +172,13 @@
       border: 1px solid rgba(45,122,79,0.35);
       border-radius: 100px;
       font-size: 12px; font-weight: 600;
-      color: #5fc88a;
-      letter-spacing: 0.02em;
+      color: var(--green-light);
       margin-bottom: 28px;
     }
     .hero-badge .dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: #5fc88a;
-      box-shadow: 0 0 8px #5fc88a;
+      background: var(--green-light);
+      box-shadow: 0 0 8px var(--green-light);
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -205,7 +186,7 @@
     .hero-title {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(48px, 7vw, 88px);
+      font-size: clamp(44px, 6.5vw, 80px);
       line-height: 1.02;
       letter-spacing: -0.025em;
       margin-bottom: 24px;
@@ -214,12 +195,11 @@
     .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
 
     .hero-role {
-      font-size: clamp(18px, 2vw, 22px);
+      font-size: clamp(17px, 2vw, 21px);
       color: var(--on-deep-2);
-      max-width: 720px;
-      margin-bottom: 12px;
+      max-width: 740px;
+      margin-bottom: 14px;
       line-height: 1.55;
-      font-weight: 400;
     }
     .hero-role strong { color: var(--on-deep); font-weight: 600; }
 
@@ -230,6 +210,12 @@
       margin-bottom: 40px;
     }
     .hero-meta-item { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta-item a {
+      color: var(--on-deep-2);
+      transition: color 0.15s;
+      border-bottom: 1px dotted transparent;
+    }
+    .hero-meta-item a:hover { color: var(--gold); border-bottom-color: var(--gold); }
     .hero-meta-item .pin { color: var(--gold); }
 
     .hero-ctas {
@@ -263,14 +249,32 @@
       .hero-meta { gap: 6px 16px; font-size: 12px; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       RECRUITER SUMMARY — "Why hire me" block, F-pattern position
-    ────────────────────────────────────────────────────────────────── */
+    /* PROOF STACK BAR */
+    .proof-stack {
+      background: var(--gold-soft);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .proof-stack-inner {
+      display: flex; align-items: center; gap: 16px;
+      font-family: var(--mono); font-size: 12.5px;
+      color: var(--ink-2);
+      letter-spacing: 0.02em;
+      flex-wrap: wrap;
+    }
+    .proof-stack-label {
+      font-weight: 600; color: var(--gold-2);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 11px;
+    }
+    .proof-stack-content { flex: 1; }
+    .proof-stack-content strong { color: var(--ink); font-weight: 700; }
+
+    /* WHY HIRE ME */
     .why-hire {
       background: var(--bg-elev);
       border-bottom: 1px solid var(--line);
       padding: 72px 0;
-      position: relative;
     }
     .why-hire-grid {
       display: grid; grid-template-columns: 380px 1fr;
@@ -291,7 +295,6 @@
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(32px, 4vw, 44px);
       line-height: 1.05; letter-spacing: -0.02em;
-      color: var(--ink);
     }
     .why-hire-left h2 em { font-style: italic; color: var(--gold); }
 
@@ -315,7 +318,6 @@
       display: block;
       font-size: 16px; font-weight: 600;
       color: var(--ink); margin-bottom: 4px;
-      letter-spacing: -0.01em;
     }
     .bullet-content span {
       font-size: 14.5px; color: var(--ink-3); line-height: 1.6;
@@ -323,12 +325,9 @@
 
     @media (max-width: 900px) {
       .why-hire-grid { grid-template-columns: 1fr; gap: 32px; }
-      .why-hire { padding: 56px 0; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       BEST-FIT ROLES + RECRUITER SCAN — quick credibility row
-    ────────────────────────────────────────────────────────────────── */
+    /* SCAN SECTION */
     .scan-section {
       padding: 72px 0;
       background: var(--bg);
@@ -364,13 +363,9 @@
     .role-pill:hover {
       border-color: var(--gold);
       background: var(--gold-soft);
-      color: var(--ink);
       transform: translateY(-1px);
     }
-    .role-pill .check {
-      color: var(--gold);
-      font-weight: 700;
-    }
+    .role-pill .check { color: var(--gold); font-weight: 700; }
 
     .scan-list { list-style: none; }
     .scan-item {
@@ -390,18 +385,17 @@
       .roles-grid { grid-template-columns: 1fr; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       FLAGSHIP PROJECTS — dominant cards, premium presentation
-    ────────────────────────────────────────────────────────────────── */
+    /* FLAGSHIP & OTHER PROJECTS */
     .flagship-section {
       padding: 96px 0 80px;
       background: var(--bg-elev);
-      position: relative;
     }
-    .section-head {
-      margin-bottom: 48px;
-      max-width: 720px;
+    .other-section {
+      padding: 96px 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
     }
+    .section-head { margin-bottom: 48px; max-width: 720px; }
     .section-eyebrow {
       font-family: var(--mono); font-size: 11px;
       text-transform: uppercase; letter-spacing: 0.14em;
@@ -416,7 +410,6 @@
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(34px, 4.5vw, 52px);
       line-height: 1.05; letter-spacing: -0.022em;
-      color: var(--ink);
       margin-bottom: 14px;
     }
     .section-title em { font-style: italic; color: var(--gold); }
@@ -429,9 +422,7 @@
       display: grid; grid-template-columns: 1.15fr 1fr;
       gap: 24px;
     }
-    @media (max-width: 980px) {
-      .flagship-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 980px) { .flagship-grid { grid-template-columns: 1fr; } }
 
     .flagship-card {
       background: white;
@@ -442,6 +433,7 @@
       overflow: hidden;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-sm);
+      cursor: pointer;
     }
     .flagship-card:hover {
       border-color: var(--gold);
@@ -471,14 +463,8 @@
       text-transform: uppercase;
       border-radius: 4px;
     }
-    .flag-tag-primary {
-      background: var(--gold);
-      color: white;
-    }
-    .flag-tag-secondary {
-      background: var(--bg-deep);
-      color: var(--on-deep);
-    }
+    .flag-tag-primary { background: var(--gold); color: white; }
+    .flag-tag-secondary { background: var(--bg-deep); color: var(--on-deep); }
     .flag-tag-outline {
       background: transparent;
       color: var(--ink-2);
@@ -496,7 +482,6 @@
       font-size: clamp(28px, 3.5vw, 40px);
       font-weight: 400; line-height: 1.05;
       letter-spacing: -0.02em;
-      color: var(--ink);
       margin-bottom: 8px;
     }
     .flag-title em { font-style: italic; color: var(--gold); }
@@ -548,14 +533,7 @@
       .flag-pitch { grid-template-columns: 1fr; gap: 14px; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       OTHER PROJECTS — clean secondary grid
-    ────────────────────────────────────────────────────────────────── */
-    .other-section {
-      padding: 96px 0;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-    }
+    /* OTHER projects grid */
     .other-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -569,6 +547,7 @@
       display: flex; flex-direction: column;
       transition: all 0.22s ease;
       min-height: 240px;
+      cursor: pointer;
     }
     .other-card:hover {
       border-color: var(--ink-3);
@@ -585,7 +564,6 @@
       font-family: var(--serif); font-weight: 400;
       font-size: 23px; line-height: 1.15;
       letter-spacing: -0.015em;
-      color: var(--ink);
       margin-bottom: 8px;
     }
     .other-title em { font-style: italic; color: var(--gold); }
@@ -608,11 +586,12 @@
       flex: 1;
       padding: 10px 14px;
       font-family: var(--sans); font-size: 12.5px;
-      font-weight: 600; letter-spacing: -0.005em;
+      font-weight: 600;
       border-radius: 5px;
       transition: all 0.18s;
       text-align: center;
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer;
     }
     .mini-btn-primary {
       background: var(--bg-deep); color: var(--on-deep);
@@ -624,9 +603,7 @@
     }
     .mini-btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
-    /* ──────────────────────────────────────────────────────────────────
-       SKILLS — broad capability grid
-    ────────────────────────────────────────────────────────────────── */
+    /* SKILLS */
     .skills-section {
       padding: 96px 0;
       background: var(--bg-elev);
@@ -654,9 +631,7 @@
     .skill-block .name {
       font-family: var(--serif); font-weight: 400;
       font-size: 22px; line-height: 1.15;
-      color: var(--ink);
       margin-bottom: 12px;
-      letter-spacing: -0.015em;
     }
     .skill-block .skills-list {
       font-size: 13.5px;
@@ -664,9 +639,7 @@
       line-height: 1.7;
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       EXPERIENCE — concise career snapshot
-    ────────────────────────────────────────────────────────────────── */
+    /* EXPERIENCE */
     .experience-section {
       padding: 96px 0;
       background: var(--bg);
@@ -674,42 +647,61 @@
     }
     .experience-list {
       display: flex; flex-direction: column;
-      max-width: 820px;
+      max-width: 920px;
     }
     .exp-item {
-      display: grid; grid-template-columns: 140px 1fr;
+      display: grid; grid-template-columns: 160px 1fr;
       gap: 32px;
-      padding: 24px 0;
+      padding: 28px 0;
       border-bottom: 1px solid var(--line);
     }
     .exp-item:last-child { border-bottom: none; }
     .exp-period {
       font-family: var(--mono); font-size: 12px;
       color: var(--ink-3); letter-spacing: 0.04em;
-      padding-top: 4px;
+      padding-top: 6px;
     }
     .exp-role {
       font-family: var(--serif); font-weight: 400;
-      font-size: 22px; line-height: 1.2;
-      color: var(--ink); letter-spacing: -0.015em;
+      font-size: 24px; line-height: 1.2;
+      letter-spacing: -0.015em;
       margin-bottom: 4px;
     }
     .exp-company {
       font-size: 13.5px; color: var(--gold);
-      font-weight: 600; margin-bottom: 10px;
-      letter-spacing: -0.005em;
+      font-weight: 600; margin-bottom: 14px;
     }
     .exp-detail {
-      font-size: 14px; color: var(--ink-3);
-      line-height: 1.65;
+      font-size: 14.5px; color: var(--ink-2);
+      line-height: 1.7;
     }
+    .exp-bullets {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .exp-bullets li {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.65;
+      margin-bottom: 6px;
+    }
+    .exp-bullets li::before {
+      content: "▸";
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 13px;
+      grid-column: 1;
+    }
+    .exp-bullets li span { grid-column: 2; }
+    .exp-bullets strong { color: var(--ink); font-weight: 600; }
     @media (max-width: 700px) {
       .exp-item { grid-template-columns: 1fr; gap: 8px; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       FINAL CTA — strong contact section
-    ────────────────────────────────────────────────────────────────── */
+    /* CTA SECTION */
     .cta-section {
       background: var(--bg-deep);
       color: var(--on-deep);
@@ -725,7 +717,7 @@
       pointer-events: none;
     }
     .cta-inner {
-      max-width: 820px; margin: 0 auto;
+      max-width: 880px; margin: 0 auto;
       text-align: center;
       position: relative; z-index: 2;
     }
@@ -739,7 +731,6 @@
       font-family: var(--serif); font-weight: 400;
       font-size: clamp(40px, 6vw, 72px);
       line-height: 1.02; letter-spacing: -0.025em;
-      color: var(--on-deep);
       margin-bottom: 20px;
     }
     .cta-title em { font-style: italic; color: var(--gold); }
@@ -756,18 +747,18 @@
     }
     .cta-contact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: rgba(245,243,236,0.12);
       border: 1px solid rgba(245,243,236,0.12);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      max-width: 720px;
+      max-width: 880px;
       margin: 0 auto;
     }
     .cta-contact-cell {
       background: var(--bg-deep);
-      padding: 24px 20px;
+      padding: 24px 18px;
       text-align: left;
       transition: background 0.18s;
       display: flex; flex-direction: column; gap: 6px;
@@ -787,17 +778,18 @@
       letter-spacing: 0.1em;
     }
     .cta-contact-cell .val {
-      font-size: 16px; color: var(--on-deep);
+      font-size: 14.5px; color: var(--on-deep);
       font-weight: 500; word-break: break-word;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
+      .cta-contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
       .cta-contact-grid { grid-template-columns: 1fr; }
       .cta-section { padding: 64px 0; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       FOOTER
-    ────────────────────────────────────────────────────────────────── */
+    /* FOOTER */
     footer {
       background: var(--bg-deep);
       color: var(--on-deep-2);
@@ -817,15 +809,13 @@
     }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ──────────────────────────────────────────────────────────────────
-       STICKY MOBILE CTA BAR
-    ────────────────────────────────────────────────────────────────── */
+    /* STICKY MOBILE CTA */
     .sticky-cta {
       position: fixed;
       bottom: 16px; left: 16px; right: 16px;
       z-index: 100;
       display: none;
-      gap: 8px;
+      gap: 6px;
       background: rgba(14,17,22,0.96);
       backdrop-filter: blur(12px);
       padding: 10px;
@@ -835,14 +825,19 @@
     }
     .sticky-cta a {
       flex: 1;
-      padding: 14px 12px;
-      font-size: 14px; font-weight: 600;
+      padding: 12px 8px;
+      font-size: 12.5px; font-weight: 600;
       border-radius: 8px;
       text-align: center;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      cursor: pointer;
     }
     .sticky-cta .sticky-call {
       background: var(--gold); color: white;
+    }
+    .sticky-cta .sticky-email {
+      background: rgba(245,243,236,0.1); color: var(--on-deep);
+      border: 1px solid rgba(245,243,236,0.18);
     }
     .sticky-cta .sticky-demo {
       background: rgba(245,243,236,0.1); color: var(--on-deep);
@@ -853,9 +848,701 @@
       footer { padding-bottom: 90px; }
     }
 
-    /* ──────────────────────────────────────────────────────────────────
-       REVEAL ANIMATIONS — subtle, conversion-supporting
-    ────────────────────────────────────────────────────────────────── */
+    /* DEMO MODAL */
+    .demo-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(14,17,22,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px;
+      overflow-y: auto;
+      animation: overlay-in 0.25s ease;
+    }
+    .demo-overlay.open { display: flex; }
+    @keyframes overlay-in { from { opacity: 0; } to { opacity: 1; } }
+
+    .demo-window {
+      background: var(--bg-elev);
+      border-radius: var(--radius-xl);
+      max-width: 1100px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+      animation: window-in 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    @keyframes window-in {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .demo-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+      background: white;
+      position: sticky; top: 0; z-index: 5;
+    }
+    .demo-header-left {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .demo-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-style: italic; font-size: 22px;
+      color: white;
+    }
+    .demo-icon.gold { background: var(--gold); }
+    .demo-icon.green { background: var(--green); }
+    .demo-icon.blue { background: var(--blue); }
+    .demo-icon.violet { background: var(--violet); }
+    .demo-icon.amber { background: var(--amber); }
+    .demo-icon.red { background: var(--red); }
+
+    .demo-title-block .num {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-4); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .demo-title-block h2 {
+      font-family: var(--serif); font-size: 22px;
+      font-weight: 400; line-height: 1.2;
+    }
+    .demo-close {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--ink-2);
+      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+      border: 1px solid var(--line);
+    }
+    .demo-close:hover { background: var(--ink); color: white; border-color: var(--ink); }
+
+    .demo-body {
+      padding: 32px;
+      max-height: calc(90vh - 90px);
+      overflow-y: auto;
+    }
+    @media (max-width: 700px) {
+      .demo-overlay { padding: 12px 8px; }
+      .demo-header { padding: 16px 20px; }
+      .demo-body { padding: 20px; }
+      .demo-title-block h2 { font-size: 18px; }
+      .demo-icon { width: 36px; height: 36px; font-size: 18px; }
+    }
+
+    /* SHARED DEMO ELEMENTS */
+    .demo-tagline {
+      font-size: 16px; color: var(--ink-3);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .demo-tagline strong { color: var(--ink); font-weight: 600; }
+
+    .demo-input-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .demo-input {
+      flex: 1; min-width: 200px;
+      padding: 11px 14px;
+      background: white;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      font-family: var(--sans); font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .demo-input:focus { border-color: var(--gold); }
+    .demo-select {
+      padding: 11px 14px;
+      background: white;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      font-family: var(--sans); font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      cursor: pointer;
+    }
+    .demo-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: white;
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      font-family: var(--sans); font-size: 14px;
+      color: var(--ink);
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+      line-height: 1.6;
+    }
+    .demo-textarea:focus { border-color: var(--gold); }
+    .demo-quick-pills {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin: 12px 0 8px;
+    }
+    .demo-quick-pills .label {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-3); letter-spacing: 0.08em;
+      align-self: center;
+    }
+    .demo-pill {
+      padding: 5px 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .demo-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+    .demo-section-title {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-3); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 24px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .demo-section-title .accent { color: var(--gold); }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .result-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      transition: all 0.2s;
+    }
+    .result-card:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+    .result-card.blue { border-left-color: var(--blue); }
+    .result-card.green { border-left-color: var(--green); }
+    .result-card.violet { border-left-color: var(--violet); }
+    .result-card.amber { border-left-color: var(--amber); }
+    .result-card.red { border-left-color: var(--red); }
+    .result-meta {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-4); letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .result-title {
+      font-family: var(--serif); font-size: 18px;
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .result-desc {
+      font-size: 13px; color: var(--ink-3);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .result-tags {
+      display: flex; flex-wrap: wrap; gap: 4px;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-4);
+    }
+
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .stat-cell {
+      background: white;
+      padding: 16px 18px;
+    }
+    .stat-cell .label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-4); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-cell .value {
+      font-family: var(--serif); font-size: 24px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .stat-cell.gold .value { color: var(--gold); }
+    .stat-cell.green .value { color: var(--green); }
+    .stat-cell.red .value { color: var(--red); }
+    .stat-cell.blue .value { color: var(--blue); }
+
+    .severity-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--mono); font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .severity-pill.high { background: rgba(181,69,69,0.12); color: var(--red); }
+    .severity-pill.medium { background: rgba(217,154,43,0.14); color: var(--amber); }
+    .severity-pill.low { background: rgba(45,122,79,0.12); color: var(--green); }
+
+    .shot-row {
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .shot-row.high { border-left-color: var(--red); }
+    .shot-row.medium { border-left-color: var(--amber); }
+    .shot-row.low { border-left-color: var(--green); }
+    .shot-tc {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-3);
+    }
+    .shot-desc {
+      font-size: 13.5px; color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .shot-desc strong { color: var(--ink); font-weight: 600; }
+
+    .ad-slot-row {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 8px;
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .ad-slot-num {
+      font-family: var(--serif); font-size: 28px;
+      color: var(--red); font-weight: 400;
+    }
+    .ad-slot-body strong { color: var(--ink); font-weight: 600; }
+    .ad-slot-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+    .ad-slot-cta {
+      padding: 6px 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-2);
+    }
+
+    .pipeline-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .pipeline-step {
+      background: white;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .pipeline-step.done { background: var(--gold-soft); }
+    .pipeline-step .num {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--gold); letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .pipeline-step .lbl {
+      font-family: var(--serif); font-size: 14px;
+      font-weight: 600;
+    }
+    .pipeline-step .desc {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-3);
+      margin-top: 2px;
+    }
+
+    .frame-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .frame-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .frame-preview {
+      aspect-ratio: 16 / 9;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 36px; font-weight: 400;
+      color: white;
+      position: relative;
+    }
+    .frame-label {
+      position: absolute; top: 8px; left: 10px;
+      font-family: var(--mono); font-size: 10px;
+      background: rgba(0,0,0,0.4); color: white;
+      padding: 2px 7px; border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+    .frame-caption {
+      padding: 10px 14px;
+      font-size: 12px; color: var(--ink-3);
+      line-height: 1.5;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .upgrade-panel {
+      background: linear-gradient(135deg, var(--gold-soft) 0%, rgba(232,200,148,0.3) 100%);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-top: 20px;
+      display: flex; gap: 16px; align-items: center;
+    }
+    .upgrade-panel .icon {
+      width: 44px; height: 44px;
+      background: var(--gold); color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 22px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .upgrade-panel .label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--gold-2); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .upgrade-panel .msg {
+      font-size: 14px; color: var(--ink); font-weight: 500;
+      line-height: 1.5; margin-bottom: 4px;
+    }
+    .upgrade-panel .offer {
+      font-size: 12px; color: var(--ink-3); font-style: italic;
+    }
+
+    .churn-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-top: 12px;
+      display: flex; gap: 14px; align-items: center;
+    }
+    .churn-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .churn-dot.low { background: var(--green); box-shadow: 0 0 10px var(--green); }
+    .churn-dot.medium { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .churn-dot.high { background: var(--red); box-shadow: 0 0 10px var(--red); }
+    .churn-info .label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-3); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .churn-info .level {
+      font-family: var(--serif); font-size: 17px;
+      font-weight: 500;
+    }
+    .churn-info .level.low { color: var(--green); }
+    .churn-info .level.medium { color: var(--amber); }
+    .churn-info .level.high { color: var(--red); }
+    .churn-info .reason {
+      font-size: 13px; color: var(--ink-3);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .summary-quote {
+      background: var(--gold-soft);
+      border-left: 3px solid var(--gold);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 20px 0 0;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.6;
+    }
+    .summary-quote .label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--gold-2); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-style: normal;
+    }
+
+    .demo-tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .demo-tab {
+      padding: 10px 18px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-3); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-weight: 500;
+    }
+    .demo-tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .demo-tab:hover:not(.active) { color: var(--ink); }
+    .demo-panel { display: none; }
+    .demo-panel.active { display: block; }
+
+    .doc-result {
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--green);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 8px;
+    }
+    .doc-result .head {
+      display: flex; justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .doc-result .id {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--green); letter-spacing: 0.1em;
+    }
+    .doc-result .score {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-3);
+    }
+    .doc-result .text {
+      font-size: 13px; color: var(--ink-2); line-height: 1.6;
+    }
+
+    .trace-item {
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--green);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 6px;
+      font-family: var(--mono);
+    }
+    .trace-step {
+      font-size: 10px; color: var(--green);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .trace-result {
+      font-size: 12px; color: var(--ink-2);
+      line-height: 1.5; word-break: break-word;
+    }
+
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .arch-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--green);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .arch-num {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--green); letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .arch-card h4 {
+      font-family: var(--serif); font-size: 17px;
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .arch-card p {
+      font-size: 12.5px; color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .concept-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--amber);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .concept-num {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--amber); letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .concept-title {
+      font-family: var(--serif); font-size: 17px;
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .concept-angle {
+      font-style: italic; font-size: 12.5px;
+      color: var(--ink-2); line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .concept-tag {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--amber); margin-bottom: 6px;
+    }
+    .concept-hook {
+      font-size: 12px; color: var(--ink-3);
+      line-height: 1.5;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .script-row {
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--amber);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 6px;
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .script-dur {
+      font-family: var(--mono); font-size: 16px;
+      color: var(--amber); font-weight: 600;
+    }
+    .script-text {
+      font-size: 13px; color: var(--ink-2); line-height: 1.6;
+    }
+
+    .storyboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .sb-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sb-card .scene-num {
+      position: absolute; top: 10px; right: 14px;
+      font-family: var(--serif); font-size: 28px;
+      color: var(--amber); opacity: 0.2;
+    }
+    .sb-label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--amber); letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .sb-visual {
+      font-size: 13px; color: var(--ink-2);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .sb-copy {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-3); font-style: italic;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .rec-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 700px) { .rec-columns { grid-template-columns: 1fr; } }
+    .rec-col {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .rec-col-head {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .rec-col-head h4 {
+      font-family: var(--serif); font-size: 15px; font-weight: 500;
+    }
+    .rec-col-badge {
+      font-family: var(--mono); font-size: 9px;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+    .rec-col.free .rec-col-badge { color: var(--green); border-color: var(--green); }
+    .rec-col.premium .rec-col-badge { color: var(--gold); border-color: var(--gold); }
+    .rec-col.free .rec-col-head { background: rgba(45,122,79,0.05); }
+    .rec-col.premium .rec-col-head { background: rgba(192,138,62,0.05); }
+    .rec-col-body { padding: 12px; }
+    .rec-item {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 6px;
+    }
+    .rec-item:last-child { margin-bottom: 0; }
+    .rec-item h5 {
+      font-family: var(--serif); font-size: 15px;
+      font-weight: 400; margin-bottom: 4px;
+    }
+    .rec-item .why {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--ink-3); margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--line);
+      font-style: italic;
+    }
+
+    /* REVEAL ANIMATIONS */
     .reveal {
       opacity: 0;
       transform: translateY(16px);
@@ -877,9 +1564,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     STICKY HEADER · phone always visible
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- HEADER -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#top" class="brand">
@@ -887,65 +1572,76 @@
       <span class="brand-name"><span class="brand-name-text">Aleg Alman</span></span>
     </a>
     <div class="nav-actions">
-      <a href="tel:+19299397474" class="nav-phone" aria-label="Call Aleg directly">
-        <span class="icon">☎</span>
-        <span class="nav-phone-text">(929) 939-7474</span>
+      <a href="tel:+19299397474" class="nav-link" aria-label="Call Aleg">
+        <span>☎</span>
+        <span class="nav-link-text">(929) 939-7474</span>
+      </a>
+      <a href="mailto:almanaleg@gmail.com" class="nav-link" aria-label="Email Aleg">
+        <span>✉</span>
+        <span class="nav-link-text">Email</span>
+      </a>
+      <a href="alman_resume.pdf" download class="nav-link" aria-label="Download resume">
+        <span>↓</span>
+        <span class="nav-link-text">Resume</span>
       </a>
       <a href="#contact" class="btn btn-primary">Hire Aleg →</a>
     </div>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     HERO · 5-second answer to the four scanning questions
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="top">
   <div class="container hero-inner">
     <div class="hero-badge reveal">
       <span class="dot"></span>
-      <span>Available immediately · Burbank, CA · Open to on-site &amp; hybrid</span>
+      <span>Available immediately · Los Angeles, CA · On-site &amp; hybrid</span>
     </div>
 
     <h1 class="hero-title reveal reveal-d2">
-      Senior <em>AI/ML Engineer</em><br/>
-      building production GenAI<br/>
+      <em>AI Product Architect</em><br/>
+      &amp; Creative Technologist<br/>
       for streaming &amp; entertainment.
     </h1>
 
     <p class="hero-role reveal reveal-d3">
-      <strong>10+ years across EPAM, Yandex, NYC, and LA.</strong> Targeting senior AI/ML, GenAI platform, and AI product roles at <strong>Disney, Netflix, Paramount</strong>, and peer studios. Seven working demos. International background. Business-aware.
+      Bridging <strong>streaming platforms</strong>, <strong>ML recommendation systems</strong>, <strong>generative AI</strong>, content strategy, and revenue-growth execution. Builds practical AI tools that reduce manual work, improve discovery, accelerate creative workflows, and monetize streaming audiences.
     </p>
 
     <div class="hero-meta reveal reveal-d3">
-      <span class="hero-meta-item"><span class="pin">●</span> 375 S 3rd St, Apt 326, Burbank, CA 91502</span>
-      <span class="hero-meta-item"><span class="pin">●</span> (929) 939-7474</span>
+      <span class="hero-meta-item"><span class="pin">●</span> Los Angeles, CA</span>
+      <span class="hero-meta-item"><span class="pin">●</span> <a href="tel:+19299397474">(929) 939-7474</a></span>
+      <span class="hero-meta-item"><span class="pin">●</span> <a href="mailto:almanaleg@gmail.com">almanaleg@gmail.com</a></span>
     </div>
 
     <div class="hero-ctas reveal reveal-d4">
       <a href="#flagship" class="btn btn-gold btn-large">
         <span>View Flagship Demos</span>
-        <span class="btn-icon">→</span>
+        <span>→</span>
+      </a>
+      <a href="alman_resume.pdf" download class="btn btn-ghost-light btn-large">
+        <span>↓</span>
+        <span>Download Resume</span>
       </a>
       <a href="tel:+19299397474" class="btn btn-ghost-light btn-large">
-        <span class="btn-icon">☎</span>
-        <span>Call Aleg Now</span>
+        <span>☎</span>
+        <span>Call Aleg</span>
       </a>
-      <a href="#contact" class="btn btn-ghost-light btn-large">
-        <span class="btn-icon">↓</span>
-        <span>Download Resume</span>
+      <a href="mailto:almanaleg@gmail.com" class="btn btn-ghost-light btn-large">
+        <span>✉</span>
+        <span>Email Aleg</span>
       </a>
     </div>
 
     <div class="hero-recruiter-bar reveal reveal-d4">
       <div>
-        <div class="hero-stat-label">Experience</div>
-        <div class="hero-stat-value"><em>10+</em> yrs</div>
-        <div class="hero-stat-sub">Production ML</div>
+        <div class="hero-stat-label">Revenue Growth</div>
+        <div class="hero-stat-value"><em>1,600%</em></div>
+        <div class="hero-stat-sub">$50K → $850K/mo</div>
       </div>
       <div>
         <div class="hero-stat-label">Live Demos</div>
         <div class="hero-stat-value"><em>7</em> projects</div>
-        <div class="hero-stat-sub">All clickable</div>
+        <div class="hero-stat-sub">All in-page</div>
       </div>
       <div>
         <div class="hero-stat-label">Stack</div>
@@ -961,9 +1657,19 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     WHY HIRE ME · recruiter-focused summary
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- PROOF STACK BAR -->
+<section class="proof-stack">
+  <div class="container">
+    <div class="proof-stack-inner">
+      <span class="proof-stack-label">◆ Proof Stack</span>
+      <span class="proof-stack-content">
+        Streaming infrastructure (<strong>Ivi.ru</strong>) + recommendation systems (<strong>Yandex</strong>) + generative AI portfolio + <strong>1,600% revenue growth</strong> execution + content/story experience
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HIRE ME -->
 <section class="why-hire">
   <div class="container">
     <div class="why-hire-grid">
@@ -975,36 +1681,36 @@
         <div class="bullet">
           <div class="bullet-num">i.</div>
           <div class="bullet-content">
-            <strong>Real working demos, not slideware.</strong>
-            <span>Every project on this site is a runnable FastAPI backend with a polished browser UI. Open and click — no setup required.</span>
+            <strong>Builds usable AI products, not just demos.</strong>
+            <span>Every project on this site opens an interactive demo — click and explore. No setup, no install, no link-outs.</span>
           </div>
         </div>
         <div class="bullet">
           <div class="bullet-num">ii.</div>
           <div class="bullet-content">
-            <strong>Built for the studios you're hiring for.</strong>
-            <span>Each project maps to a specific 2025–2026 problem at Disney, Netflix, or Paramount. ContinuityAI mirrors Netflix's $600M InterPositive acquisition pipeline.</span>
+            <strong>Translates content and audience data into product decisions.</strong>
+            <span>Each portfolio project is positioned around a real studio pain point: costly review cycles, fragmented metadata, weak discovery, ad-tier monetization, or slow creative packaging.</span>
           </div>
         </div>
         <div class="bullet">
           <div class="bullet-num">iii.</div>
           <div class="bullet-content">
-            <strong>International production scale.</strong>
-            <span>Built ranking systems at Yandex (hundreds of millions of users), enterprise NLP at EPAM, then five years of AI engineering across NYC and LA.</span>
+            <strong>Understands story, catalog, discovery, ads, retention, and operations.</strong>
+            <span>Streaming engineering at Ivi.ru, ML at Yandex, plus Ivi Originals script/story development — full-lifecycle view of streaming from creation to distribution.</span>
           </div>
         </div>
         <div class="bullet">
           <div class="bullet-num">iv.</div>
           <div class="bullet-content">
-            <strong>Technical, creative, and business-aware.</strong>
-            <span>Equally comfortable defending architecture trade-offs to a CTO and walking a producer through what diffusion fine-tuning means for IP guardrails.</span>
+            <strong>Proven operator: scaled a U.S. company from $50K to $850K/month.</strong>
+            <span>Built sales operations, performance marketing, project tracking, retail rollout (10+ locations), and outsourced team coordination — without proportional overhead growth.</span>
           </div>
         </div>
         <div class="bullet">
           <div class="bullet-num">v.</div>
           <div class="bullet-content">
-            <strong>Available now in Burbank.</strong>
-            <span>Walking distance to Disney Studios, Warner Bros., NBCUniversal, and Cartoon Network. On-site, hybrid, or remote — all workable.</span>
+            <strong>Available now in Los Angeles.</strong>
+            <span>Ready for streaming AI, creative technology, and AI product roles at Netflix, Disney, Paramount, Warner Bros., Apple, and Amazon.</span>
           </div>
         </div>
       </div>
@@ -1012,34 +1718,31 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     FAST RECRUITER SCAN · best-fit roles + quick proof
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- SCAN SECTION -->
 <section class="scan-section">
   <div class="container">
     <div class="scan-grid">
       <div class="scan-block reveal">
         <div class="label">Best-fit roles</div>
         <div class="roles-grid">
-          <div class="role-pill"><span class="check">✓</span> Senior AI/ML Engineer</div>
-          <div class="role-pill"><span class="check">✓</span> Staff GenAI Engineer</div>
-          <div class="role-pill"><span class="check">✓</span> AI Platform Engineer</div>
-          <div class="role-pill"><span class="check">✓</span> Lead Applied Scientist</div>
-          <div class="role-pill"><span class="check">✓</span> AI Product Lead</div>
-          <div class="role-pill"><span class="check">✓</span> ML Infrastructure Engineer</div>
-          <div class="role-pill"><span class="check">✓</span> Diffusion / CV Engineer</div>
-          <div class="role-pill"><span class="check">✓</span> RAG / LLM Engineer</div>
+          <div class="role-pill"><span class="check">✓</span> AI Product Specialist / Manager</div>
+          <div class="role-pill"><span class="check">✓</span> Creative Technology Specialist</div>
+          <div class="role-pill"><span class="check">✓</span> Generative AI Producer / Strategist</div>
+          <div class="role-pill"><span class="check">✓</span> Streaming AI / Media Technology</div>
+          <div class="role-pill"><span class="check">✓</span> Technical Project Manager</div>
+          <div class="role-pill"><span class="check">✓</span> AI Startup Operator / Builder</div>
+          <div class="role-pill"><span class="check">✓</span> Senior AI Solutions Architect</div>
+          <div class="role-pill"><span class="check">✓</span> ML Personalization Engineer</div>
         </div>
       </div>
-
       <div class="scan-block reveal reveal-d2">
         <div class="label">5-second skim</div>
         <ul class="scan-list">
-          <li class="scan-item"><span class="check">✓</span><span><strong>10+ years</strong> production ML across 3 continents</span></li>
-          <li class="scan-item"><span class="check">✓</span><span><strong>7 live demos</strong> directly relevant to streaming AI</span></li>
-          <li class="scan-item"><span class="check">✓</span><span><strong>Yandex &amp; EPAM</strong> — large-scale ranking, NLP background</span></li>
-          <li class="scan-item"><span class="check">✓</span><span><strong>RAG, diffusion, vision-LLM</strong> — current toolchain</span></li>
-          <li class="scan-item"><span class="check">✓</span><span><strong>Burbank, CA</strong> — walking distance to major studios</span></li>
+          <li class="scan-item"><span class="check">✓</span><span><strong>1,600% revenue growth</strong> as Head of Operations</span></li>
+          <li class="scan-item"><span class="check">✓</span><span><strong>Yandex ML</strong> — ranking, personalization, CTR</span></li>
+          <li class="scan-item"><span class="check">✓</span><span><strong>Ivi.ru streaming</strong> — high-load video, CDN, content</span></li>
+          <li class="scan-item"><span class="check">✓</span><span><strong>7 working AI demos</strong> directly relevant to streaming</span></li>
+          <li class="scan-item"><span class="check">✓</span><span><strong>Trilingual</strong> — English, Russian, Belarusian</span></li>
           <li class="scan-item"><span class="check">✓</span><span><strong>Available immediately</strong> — full-time or contract</span></li>
         </ul>
       </div>
@@ -1047,35 +1750,29 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     FLAGSHIP PROJECTS · two dominant cards
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- FLAGSHIP PROJECTS -->
 <section class="flagship-section" id="flagship">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-eyebrow">Flagship work · Recommended first click</div>
       <h2 class="section-title">Two projects worth <em>two minutes</em> of your time.</h2>
-      <p class="section-sub">Each one is a runnable demo solving a real, named problem at a major studio. Click "Open Demo" — they work in your browser without setup.</p>
+      <p class="section-sub">Each one opens an interactive demo right here on the page — click "Open Demo" and explore.</p>
     </div>
 
     <div class="flagship-grid">
-
-      <!-- FLAGSHIP 01: ContinuityAI -->
-      <article class="flagship-card flagship-primary reveal">
+      <article class="flagship-card flagship-primary reveal" onclick="openDemo('continuity')">
         <div class="flag-tags">
           <span class="flag-tag flag-tag-primary">★ Flagship Project</span>
           <span class="flag-tag flag-tag-secondary">Best for AI Platform Roles</span>
           <span class="flag-tag flag-tag-outline">Interactive Demo</span>
         </div>
-
         <div class="flag-num">PROJECT · 01</div>
         <h3 class="flag-title">Continuity<em>AI</em></h3>
-        <p class="flag-tagline">Vision-LLM continuity supervision for post-production.</p>
-
+        <p class="flag-tagline">Vision-LLM workflow comparing shot pairs and flagging continuity issues.</p>
         <div class="flag-pitch">
           <div class="pitch-cell">
             <div class="pitch-label">Problem</div>
-            <div class="pitch-text">Manual frame-by-frame continuity checking is the costliest bottleneck in post.</div>
+            <div class="pitch-text">Manual continuity review across props, wardrobe, lighting, makeup, background, environment is the costliest step in post.</div>
           </div>
           <div class="pitch-cell">
             <div class="pitch-label">Why it matters</div>
@@ -1083,164 +1780,135 @@
           </div>
           <div class="pitch-cell">
             <div class="pitch-label">What's inside</div>
-            <div class="pitch-text">Shot-pair analysis across 7 error categories with auto-fix suggestions.</div>
+            <div class="pitch-text">Shot-pair analysis across 7 error categories with auto-fix suggestions for VFX queues.</div>
           </div>
         </div>
-
         <div class="flag-tech">
           <span class="tech-chip">Claude Vision API</span>
           <span class="tech-chip">FastAPI</span>
-          <span class="tech-chip">OpenCV</span>
+          <span class="tech-chip">Computer Vision</span>
           <span class="tech-chip">Async pipelines</span>
-          <span class="tech-chip">Python</span>
         </div>
-
         <div class="flag-actions">
-          <a href="/continuity" class="btn btn-gold">
-            <span class="btn-icon">▶</span>
-            <span>Open Live Demo</span>
-          </a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/continuity_ai" target="_blank" rel="noopener" class="btn btn-ghost">
-            <span class="btn-icon">◧</span>
-            <span>View on GitHub</span>
-          </a>
+          <button class="btn btn-gold" onclick="event.stopPropagation(); openDemo('continuity')">
+            <span>▶</span> <span>Open Live Demo</span>
+          </button>
         </div>
       </article>
 
-      <!-- FLAGSHIP 02: Enterprise AI Orchestration -->
-      <article class="flagship-card reveal reveal-d2">
+      <article class="flagship-card reveal reveal-d2" onclick="openDemo('orchestration')">
         <div class="flag-tags">
           <span class="flag-tag flag-tag-primary">★ Flagship Project</span>
           <span class="flag-tag flag-tag-secondary">Best for AI Platform Roles</span>
           <span class="flag-tag flag-tag-outline">Interactive Demo</span>
         </div>
-
         <div class="flag-num">PROJECT · 02</div>
-        <h3 class="flag-title">Enterprise <em>Orchestration</em></h3>
-        <p class="flag-tagline">RAG, agents, tools, and YAML workflows in one platform.</p>
-
+        <h3 class="flag-title">Cinematic <em>RAG Studio</em></h3>
+        <p class="flag-tagline">Screenplay-aware RAG for script search, summaries, and source-grounded creative research.</p>
         <div class="flag-pitch">
           <div class="pitch-cell">
             <div class="pitch-label">Problem</div>
-            <div class="pitch-text">Studios need orchestration for metadata, localization, and ad-ops pipelines.</div>
+            <div class="pitch-text">Studios sit on huge script archives that creative teams can't search semantically.</div>
           </div>
           <div class="pitch-cell">
             <div class="pitch-label">Why it matters</div>
-            <div class="pitch-text">The plumbing layer underneath every internal AI tool at Disney, Paramount, Netflix.</div>
+            <div class="pitch-text">Story analysis, comparison, and grounded research for development executives and showrunners.</div>
           </div>
           <div class="pitch-cell">
             <div class="pitch-label">What's inside</div>
             <div class="pitch-text">Agent router, tool registry, RAG retrieval, and YAML-driven workflow engine.</div>
           </div>
         </div>
-
         <div class="flag-tech">
           <span class="tech-chip">RAG / TF-IDF</span>
           <span class="tech-chip">FastAPI</span>
           <span class="tech-chip">YAML workflows</span>
           <span class="tech-chip">Agent routing</span>
-          <span class="tech-chip">Python</span>
         </div>
-
         <div class="flag-actions">
-          <a href="/orchestration" class="btn btn-gold">
-            <span class="btn-icon">▶</span>
-            <span>Open Live Demo</span>
-          </a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/enterprise_ai_orchestration" target="_blank" rel="noopener" class="btn btn-ghost">
-            <span class="btn-icon">◧</span>
-            <span>View on GitHub</span>
-          </a>
+          <button class="btn btn-gold" onclick="event.stopPropagation(); openDemo('orchestration')">
+            <span>▶</span> <span>Open Live Demo</span>
+          </button>
         </div>
       </article>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     OTHER PROJECTS · clean secondary grid
-═══════════════════════════════════════════════════════════════════════ -->
-<section class="other-section" id="more">
+<!-- OTHER PROJECTS -->
+<section class="other-section">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-eyebrow">Additional working demos</div>
       <h2 class="section-title">Five more projects, <em>one click each.</em></h2>
-      <p class="section-sub">Every one runs in your browser. Each maps to a real industry problem at a major streamer.</p>
+      <p class="section-sub">Every one opens an interactive demo on this page. Each maps to a real industry problem at a major streamer.</p>
     </div>
 
     <div class="other-grid">
-      <article class="other-card reveal">
+      <article class="other-card reveal" onclick="openDemo('rec')">
         <div class="other-num">PROJECT · 03</div>
+        <h3 class="other-title">Recommendation <em>Engine</em></h3>
+        <p class="other-summary">Streaming personalization for free/premium catalogs with ranking logic and contextual upgrade prompts.</p>
+        <div class="other-tech">
+          <span class="tech-chip">Two-tower</span><span class="tech-chip">Cosine sim</span><span class="tech-chip">FastAPI</span>
+        </div>
+        <div class="other-actions">
+          <button class="mini-btn mini-btn-primary" onclick="event.stopPropagation(); openDemo('rec')"><span>▶</span> Open Demo</button>
+        </div>
+      </article>
+
+      <article class="other-card reveal reveal-d2" onclick="openDemo('adstudio')">
+        <div class="other-num">PROJECT · 04</div>
+        <h3 class="other-title">Ad <em>Creative Studio</em></h3>
+        <p class="other-summary">Brief-to-campaign generator producing concepts, short-form scripts, storyboard panels, and ad-tier positioning.</p>
+        <div class="other-tech">
+          <span class="tech-chip">LLM concepts</span><span class="tech-chip">Storyboarding</span><span class="tech-chip">FastAPI</span>
+        </div>
+        <div class="other-actions">
+          <button class="mini-btn mini-btn-primary" onclick="event.stopPropagation(); openDemo('adstudio')"><span>▶</span> Open Demo</button>
+        </div>
+      </article>
+
+      <article class="other-card reveal reveal-d3" onclick="openDemo('discovery')">
+        <div class="other-num">PROJECT · 05</div>
         <h3 class="other-title">Discovery <em>Feed AI</em></h3>
         <p class="other-summary">Solves post-binge churn — the #1 cancellation trigger on streaming platforms.</p>
         <div class="other-tech">
           <span class="tech-chip">TF-IDF</span><span class="tech-chip">scikit-learn</span><span class="tech-chip">FastAPI</span>
         </div>
         <div class="other-actions">
-          <a href="/discovery" class="mini-btn mini-btn-primary"><span>▶</span> Demo</a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/discovery_feed_ai" target="_blank" rel="noopener" class="mini-btn mini-btn-ghost">GitHub</a>
+          <button class="mini-btn mini-btn-primary" onclick="event.stopPropagation(); openDemo('discovery')"><span>▶</span> Open Demo</button>
         </div>
       </article>
 
-      <article class="other-card reveal reveal-d2">
-        <div class="other-num">PROJECT · 04</div>
+      <article class="other-card reveal" onclick="openDemo('animation')">
+        <div class="other-num">PROJECT · 06</div>
         <h3 class="other-title">GenAI <em>Animation</em></h3>
-        <p class="other-summary">Prompt → script → shot list → animatic. Diffusion-ready for Netflix Inkubator-style work.</p>
+        <p class="other-summary">Prompt → script → shot list → animatic. Diffusion-ready for experimental CG work.</p>
         <div class="other-tech">
           <span class="tech-chip">Diffusion-ready</span><span class="tech-chip">Pillow</span><span class="tech-chip">Pipeline</span>
         </div>
         <div class="other-actions">
-          <a href="/animation" class="mini-btn mini-btn-primary"><span>▶</span> Demo</a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/genai_animation_incubator" target="_blank" rel="noopener" class="mini-btn mini-btn-ghost">GitHub</a>
+          <button class="mini-btn mini-btn-primary" onclick="event.stopPropagation(); openDemo('animation')"><span>▶</span> Open Demo</button>
         </div>
       </article>
 
-      <article class="other-card reveal reveal-d3">
-        <div class="other-num">PROJECT · 05</div>
-        <h3 class="other-title">Ad <em>Creative Studio</em></h3>
-        <p class="other-summary">Brief → 3 concepts + scripts + storyboard in seconds. Built for ad-tier scaling.</p>
-        <div class="other-tech">
-          <span class="tech-chip">LLM concepts</span><span class="tech-chip">Storyboarding</span><span class="tech-chip">FastAPI</span>
-        </div>
-        <div class="other-actions">
-          <a href="/ad-studio" class="mini-btn mini-btn-primary"><span>▶</span> Demo</a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/streaming_ad_creative_studio" target="_blank" rel="noopener" class="mini-btn mini-btn-ghost">GitHub</a>
-        </div>
-      </article>
-
-      <article class="other-card reveal">
-        <div class="other-num">PROJECT · 06</div>
+      <article class="other-card reveal reveal-d2" onclick="openDemo('liveads')">
+        <div class="other-num">PROJECT · 07</div>
         <h3 class="other-title">Live <em>Ads Engine</em></h3>
         <p class="other-summary">Real-time slot planning per audience segment for live sports broadcasts.</p>
         <div class="other-tech">
           <span class="tech-chip">Real-time</span><span class="tech-chip">Segmentation</span><span class="tech-chip">FastAPI</span>
         </div>
         <div class="other-actions">
-          <a href="/live-ads" class="mini-btn mini-btn-primary"><span>▶</span> Demo</a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/live_ads_personalization_engine" target="_blank" rel="noopener" class="mini-btn mini-btn-ghost">GitHub</a>
-        </div>
-      </article>
-
-      <article class="other-card reveal reveal-d2">
-        <div class="other-num">PROJECT · 07</div>
-        <h3 class="other-title">Unified <em>Rec Engine</em></h3>
-        <p class="other-summary">Free → Premium recommendation bridge with churn signals. Pluto + Paramount+.</p>
-        <div class="other-tech">
-          <span class="tech-chip">Two-tower</span><span class="tech-chip">Cosine sim</span><span class="tech-chip">FastAPI</span>
-        </div>
-        <div class="other-actions">
-          <a href="/rec-engine" class="mini-btn mini-btn-primary"><span>▶</span> Demo</a>
-          <a href="https://github.com/alexalman/e-job-portfolio/tree/main/pluto_paramount_unified_rec_engine" target="_blank" rel="noopener" class="mini-btn mini-btn-ghost">GitHub</a>
+          <button class="mini-btn mini-btn-primary" onclick="event.stopPropagation(); openDemo('liveads')"><span>▶</span> Open Demo</button>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     SKILLS & STACK
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- SKILLS -->
 <section class="skills-section">
   <div class="container">
     <div class="section-head reveal">
@@ -1248,101 +1916,107 @@
       <h2 class="section-title">Modern AI stack, <em>production grade.</em></h2>
       <p class="section-sub">Every category below is hands-on production experience — not tutorial-level familiarity.</p>
     </div>
-
     <div class="skills-grid">
       <div class="skill-block reveal">
-        <div class="label">◆ Foundation models</div>
-        <div class="name">LLM &amp; RAG</div>
-        <div class="skills-list">Anthropic Claude · OpenAI · LangChain · FAISS · Weaviate · embeddings · prompt engineering · structured output · streaming</div>
+        <div class="label">◆ AI / ML</div>
+        <div class="name">RAG &amp; LLM Workflows</div>
+        <div class="skills-list">RAG · LLM workflows · generative AI · recommendation systems · ranking · collaborative filtering · CTR optimization · metadata enrichment · prompt engineering · vector search · personalization</div>
       </div>
       <div class="skill-block reveal reveal-d2">
-        <div class="label">◆ Visual AI</div>
-        <div class="name">Diffusion &amp; Vision</div>
-        <div class="skills-list">Stable Diffusion XL · DreamBooth · LoRA · ControlNet · CLIP · Claude Vision · OpenCV · ComfyUI · diffusers</div>
+        <div class="label">◆ Streaming / Media</div>
+        <div class="name">Content &amp; Discovery</div>
+        <div class="skills-list">Content strategy · script analysis · story intelligence · video workflows · ad-supported streaming · audience data · watch-time · retention · discovery · creative asset generation</div>
       </div>
       <div class="skill-block reveal reveal-d3">
-        <div class="label">◆ Core ML</div>
-        <div class="name">ML &amp; Deep Learning</div>
-        <div class="skills-list">PyTorch · TensorFlow · scikit-learn · Transformers · spaCy · two-tower ranking · survival analysis · SHAP</div>
+        <div class="label">◆ Execution</div>
+        <div class="name">Operations &amp; Growth</div>
+        <div class="skills-list">Product prototyping · data-driven growth · outsourced teams · performance marketing · retail rollout · vendor coordination · workflow automation</div>
       </div>
       <div class="skill-block reveal">
-        <div class="label">◆ Backend</div>
-        <div class="name">Engineering</div>
-        <div class="skills-list">Python · FastAPI · Docker · Kubernetes · PostgreSQL · Redis · Kafka · TypeScript · React · asyncio · pytest</div>
+        <div class="label">◆ Technical Toolkit</div>
+        <div class="name">Engineering Stack</div>
+        <div class="skills-list">Python · FastAPI · React · TypeScript · APIs · GitHub · Docker · PostgreSQL · OpenAI API · Anthropic Claude · YandexGPT/YandexART concepts</div>
       </div>
       <div class="skill-block reveal reveal-d2">
-        <div class="label">◆ Infrastructure</div>
-        <div class="name">MLOps &amp; Cloud</div>
-        <div class="skills-list">AWS · GCP · Vercel · model serving · vector databases · A/B testing infrastructure · monitoring · cost optimization</div>
+        <div class="label">◆ Communication</div>
+        <div class="name">Cross-Functional</div>
+        <div class="skills-list">Analytics workflows · product documentation · executive demos · creative team liaison · scriptwriting/storyboarding · entertainment technology</div>
       </div>
       <div class="skill-block reveal reveal-d3">
-        <div class="label">◆ Practice</div>
-        <div class="name">Product &amp; Process</div>
-        <div class="skills-list">Cross-functional collaboration · technical writing · hiring · roadmap planning · stakeholder communication · multilingual (EN, RU, BE)</div>
+        <div class="label">◆ Languages</div>
+        <div class="name">Trilingual</div>
+        <div class="skills-list">English (fluent professional) · Russian (native) · Belarusian (native) — full localization fluency for global content workflows</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     EXPERIENCE SNAPSHOT
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- EXPERIENCE -->
 <section class="experience-section">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-eyebrow">Career chronology</div>
-      <h2 class="section-title">A <em>decade</em> of production ML.</h2>
-      <p class="section-sub">From Minsk to Moscow to NYC to LA — every role shipped systems at scale.</p>
+      <h2 class="section-title">Streaming, ML, <em>and operations.</em></h2>
+      <p class="section-sub">A rare bridge between technical architecture, content/story instincts, and business scaling.</p>
     </div>
 
     <div class="experience-list">
       <div class="exp-item reveal">
-        <div class="exp-period">2024 — Now</div>
+        <div class="exp-period">2023 — Present</div>
         <div>
-          <div class="exp-role">Independent AI Engineer</div>
-          <div class="exp-company">Self · Burbank, CA</div>
-          <div class="exp-detail">Building AI prototypes targeting Disney, Netflix, Paramount. All 7 projects on this site are public, runnable, and inspectable.</div>
+          <div class="exp-role">Senior AI Solutions Architect / Streaming AI Portfolio Builder</div>
+          <div class="exp-company">Yandex / Beyond ML affiliate work + Independent Portfolio</div>
+          <ul class="exp-bullets">
+            <li><span>Built current streaming-AI proof points around <strong>metadata enrichment, collaborative filtering, CTR optimization, script intelligence, continuity review, and creative asset generation</strong>.</span></li>
+            <li><span>Designed generative-AI workflows using LLM and image-generation concepts to reduce manual review, accelerate creative packaging, and make internal content operations more scalable.</span></li>
+            <li><span>Packaged prototypes into executive-friendly demos so HR, product leaders, and technical teams can quickly evaluate business value, implementation logic, and hiring fit.</span></li>
+          </ul>
         </div>
       </div>
-      <div class="exp-item reveal">
-        <div class="exp-period">2022 — 2024</div>
-        <div>
-          <div class="exp-role">Lead AI/ML Engineer</div>
-          <div class="exp-company">Entertainment AI · Los Angeles, CA</div>
-          <div class="exp-detail">Diffusion fine-tuning, LLM content pipelines, multimodal search for streaming platforms. Research prototype to production at scale.</div>
-        </div>
-      </div>
+
       <div class="exp-item reveal">
         <div class="exp-period">2019 — 2022</div>
         <div>
-          <div class="exp-role">Staff ML Engineer</div>
-          <div class="exp-company">Media Tech · New York, NY</div>
-          <div class="exp-detail">LLM prototypes, content moderation AI, early diffusion research. First production GPT-3-era deployment at the company.</div>
+          <div class="exp-role">Head of Operations &amp; Data Strategy</div>
+          <div class="exp-company">United Porte Inc. · U.S. Business Turnaround</div>
+          <ul class="exp-bullets">
+            <li><span>Engineered growth from approximately <strong>$50K to $850K/month</strong> by building the company's first practical systems for sales operations, performance marketing, project tracking, and customer workflow execution.</span></li>
+            <li><span>Hired and coordinated overseas outsourced specialists, creating a lean operating model for sales support, marketing execution, catalog work, and daily management without heavy fixed overhead.</span></li>
+            <li><span>Supported opening <strong>10+ retail locations</strong> across the U.S. and expanded the product matrix roughly <strong>10x</strong> without proportional inventory growth by shifting to customizable, constructor-style products.</span></li>
+          </ul>
         </div>
       </div>
+
       <div class="exp-item reveal">
-        <div class="exp-period">2016 — 2019</div>
+        <div class="exp-period">2018 — 2019</div>
         <div>
-          <div class="exp-role">Senior ML Engineer</div>
+          <div class="exp-role">Senior ML &amp; AI Engineer</div>
           <div class="exp-company">Yandex · Moscow, Russia</div>
-          <div class="exp-detail">Large-scale ranking models, recommendation systems, A/B experimentation at petabyte scale. Hundreds of millions of daily users.</div>
+          <ul class="exp-bullets">
+            <li><span>Contributed to large-scale <strong>ML, ranking, and personalization systems</strong> during a period of intense search and media-platform competition, connecting model quality to user behavior and product outcomes.</span></li>
+            <li><span>Worked on AI-powered feed, recommendation, and voice-assistant-adjacent product concepts — including personalization logic, real-time ranking signals, CTR improvement, and user-behavior modeling.</span></li>
+            <li><span>Translated ML experimentation into practical product gains: better discovery, stronger engagement, more relevant feeds, and clearer feedback loops for product teams.</span></li>
+          </ul>
         </div>
       </div>
+
       <div class="exp-item reveal">
-        <div class="exp-period">2014 — 2016</div>
+        <div class="exp-period">2014 — 2018</div>
         <div>
-          <div class="exp-role">Software Engineer</div>
-          <div class="exp-company">EPAM Systems · Minsk, Belarus</div>
-          <div class="exp-detail">Enterprise NLP and multilingual analytics for Fortune 500 clients. Russian/English NER systems with 95%+ accuracy.</div>
+          <div class="exp-role">Lead Streaming Engineer &amp; Content Producer</div>
+          <div class="exp-company">Ivi.ru · Major Streaming Platform</div>
+          <ul class="exp-bullets">
+            <li><span>Core contributor in scaling a major streaming platform, supporting <strong>high-load video architecture, CDN optimization, playback reliability, and content-delivery workflows</strong>.</span></li>
+            <li><span>Combined engineering and creative work by contributing to <strong>Ivi Originals</strong> concepts, script/story development, and production thinking — giving a full-lifecycle view of streaming from content creation to distribution.</span></li>
+            <li><span>Developed early personalization and collaborative-filtering concepts aimed at increasing retention, watch time, content discovery, and audience satisfaction.</span></li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     FINAL CTA · contact section
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- FINAL CTA -->
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-inner">
@@ -1352,39 +2026,39 @@
         is a <em>two-minute call</em>.
       </h2>
       <p class="cta-sub reveal reveal-d3">
-        I respond to recruiter calls and emails within the same business day. If you've made it this far, you've already seen the work — let's just talk.
+        I respond to recruiter calls and emails within the same business day. If you've made it this far, you've already seen the work — let's talk.
       </p>
-
       <div class="cta-actions reveal reveal-d3">
         <a href="tel:+19299397474" class="btn btn-gold btn-large">
-          <span class="btn-icon">☎</span>
-          <span>Call (929) 939-7474</span>
+          <span>☎</span> <span>Call (929) 939-7474</span>
         </a>
-        <a href="#flagship" class="btn btn-ghost-light btn-large">
-          <span class="btn-icon">▶</span>
-          <span>Watch Flagship Demo</span>
+        <a href="mailto:almanaleg@gmail.com" class="btn btn-gold btn-large">
+          <span>✉</span> <span>Email Aleg</span>
         </a>
-        <a href="https://github.com/alexalman/e-job-portfolio" target="_blank" rel="noopener" class="btn btn-ghost-light btn-large">
-          <span class="btn-icon">◧</span>
-          <span>View Full GitHub</span>
+        <a href="alman_resume.pdf" download class="btn btn-ghost-light btn-large">
+          <span>↓</span> <span>Download Resume</span>
         </a>
       </div>
-
       <div class="cta-contact-grid reveal reveal-d4">
         <a href="tel:+19299397474" class="cta-contact-cell">
           <div class="ic">☎</div>
           <div class="lab">Call directly</div>
           <div class="val">(929) 939-7474</div>
         </a>
-        <a href="https://maps.google.com/?q=375+S+3rd+St+Apt+326+Burbank+CA+91502" target="_blank" rel="noopener" class="cta-contact-cell">
+        <a href="mailto:almanaleg@gmail.com" class="cta-contact-cell">
+          <div class="ic">✉</div>
+          <div class="lab">Email</div>
+          <div class="val">almanaleg@gmail.com</div>
+        </a>
+        <a href="alman_resume.pdf" download class="cta-contact-cell">
+          <div class="ic">↓</div>
+          <div class="lab">Download</div>
+          <div class="val">Resume PDF</div>
+        </a>
+        <a href="https://maps.google.com/?q=Los+Angeles+CA" target="_blank" rel="noopener" class="cta-contact-cell">
           <div class="ic">●</div>
           <div class="lab">Based in</div>
-          <div class="val">Burbank, CA 91502</div>
-        </a>
-        <a href="https://github.com/alexalman/e-job-portfolio" target="_blank" rel="noopener" class="cta-contact-cell">
-          <div class="ic">◧</div>
-          <div class="lab">All work public</div>
-          <div class="val">github.com/alexalman</div>
+          <div class="val">Los Angeles, CA</div>
         </a>
       </div>
     </div>
@@ -1394,53 +2068,616 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>© 2026 Aleg Alman · Senior AI/ML Engineer · Burbank, CA</div>
+      <div>© 2026 Aleg "Alex" Alman · AI Product Architect · Los Angeles, CA</div>
       <div class="footer-links">
         <a href="tel:+19299397474">☎ (929) 939-7474</a>
-        <a href="https://github.com/alexalman/e-job-portfolio" target="_blank" rel="noopener">GitHub</a>
-        <a href="#flagship">Flagship Demos</a>
-        <a href="#contact">Contact</a>
+        <a href="mailto:almanaleg@gmail.com">✉ almanaleg@gmail.com</a>
+        <a href="alman_resume.pdf" download>↓ Resume</a>
+        <a href="#flagship">Demos</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════════════════
-     STICKY MOBILE CTA · always-visible call action
-═══════════════════════════════════════════════════════════════════════ -->
+<!-- STICKY MOBILE CTA -->
 <div class="sticky-cta">
-  <a href="tel:+19299397474" class="sticky-call">
-    <span>☎</span> Call Aleg
-  </a>
-  <a href="#flagship" class="sticky-demo">
-    <span>▶</span> Demos
-  </a>
+  <a href="tel:+19299397474" class="sticky-call"><span>☎</span> Call</a>
+  <a href="mailto:almanaleg@gmail.com" class="sticky-email"><span>✉</span> Email</a>
+  <a href="alman_resume.pdf" download class="sticky-demo"><span>↓</span> Resume</a>
+</div>
+
+<!-- DEMO MODAL -->
+<div class="demo-overlay" id="demo-overlay" onclick="if(event.target.id==='demo-overlay') closeDemo()">
+  <div class="demo-window">
+    <div class="demo-header">
+      <div class="demo-header-left">
+        <div class="demo-icon" id="demo-icon">A</div>
+        <div class="demo-title-block">
+          <div class="num" id="demo-num">PROJECT</div>
+          <h2 id="demo-title">Demo</h2>
+        </div>
+      </div>
+      <button class="demo-close" onclick="closeDemo()" aria-label="Close demo">×</button>
+    </div>
+    <div class="demo-body" id="demo-body"></div>
+  </div>
 </div>
 
 <script>
-  // Header scroll state
-  const nav = document.getElementById('nav');
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        nav.classList.toggle('scrolled', window.scrollY > 8);
-        ticking = false;
-      });
-      ticking = true;
+const nav = document.getElementById('nav');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDemo(); });
+
+const DEMOS = {
+  continuity:    { num: 'PROJECT · 01 · CONTINUITY AI',         icon: 'C', color: 'gold',   title: 'ContinuityAI · Vision-LLM continuity supervision' },
+  orchestration: { num: 'PROJECT · 02 · CINEMATIC RAG',         icon: 'R', color: 'green',  title: 'Cinematic RAG Studio · Screenplay-aware retrieval' },
+  rec:           { num: 'PROJECT · 03 · RECOMMENDATION ENGINE', icon: 'R', color: 'gold',   title: 'Recommendation Engine · Free + premium ranking' },
+  adstudio:      { num: 'PROJECT · 04 · AD CREATIVE STUDIO',    icon: 'A', color: 'amber',  title: 'Ad Creative Studio · Brief-to-campaign generator' },
+  discovery:     { num: 'PROJECT · 05 · DISCOVERY FEED',        icon: 'D', color: 'blue',   title: 'Discovery Feed AI · Semantic post-binge recommender' },
+  animation:     { num: 'PROJECT · 06 · GENAI ANIMATION',       icon: 'A', color: 'violet', title: 'GenAI Animation · Prompt-to-animatic pipeline' },
+  liveads:       { num: 'PROJECT · 07 · LIVE ADS ENGINE',       icon: 'L', color: 'red',    title: 'Live Ads Engine · Real-time slot planning' },
+};
+
+function openDemo(key) {
+  const meta = DEMOS[key];
+  if (!meta) return;
+  document.getElementById('demo-num').textContent = meta.num;
+  document.getElementById('demo-title').textContent = meta.title;
+  const iconEl = document.getElementById('demo-icon');
+  iconEl.className = 'demo-icon ' + meta.color;
+  iconEl.textContent = meta.icon;
+  document.getElementById('demo-body').innerHTML = DEMOS_HTML[key]();
+  document.getElementById('demo-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDemo() {
+  document.getElementById('demo-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+const DEMOS_HTML = {
+  continuity: () => `
+    <div class="demo-tagline">
+      <strong>Vision-LLM continuity supervision</strong> for post-production. Compares shot pairs and flags continuity issues across <strong>props, wardrobe, lighting, makeup, background, environment, and screen direction</strong>. Same class of system Netflix paid $600M for in March 2026.
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat-cell gold"><div class="label">Shots Analyzed</div><div class="value">10</div></div>
+      <div class="stat-cell red"><div class="label">Errors Found</div><div class="value">11</div></div>
+      <div class="stat-cell red"><div class="label">High Severity</div><div class="value">6</div></div>
+      <div class="stat-cell green"><div class="label">Auto-Fixable</div><div class="value">9</div></div>
+      <div class="stat-cell blue"><div class="label">Avg Match</div><div class="value">77%</div></div>
+    </div>
+
+    <div class="demo-section-title"><span class="accent">◆</span> Episode shot-pair analysis</div>
+    <div class="shot-row low"><div class="shot-tc">01:00:00<br/>01:00:12</div><div class="shot-desc"><strong>Shot 01</strong> — Clean shot pair. No continuity errors detected.</div><span class="severity-pill low">✓ Clean</span></div>
+    <div class="shot-row medium"><div class="shot-tc">01:00:08<br/>01:00:20</div><div class="shot-desc"><strong>Shot 02</strong> — Lighting: Shadow direction shifted ~40° — inconsistent with established sun position.</div><span class="severity-pill medium">Medium</span></div>
+    <div class="shot-row high"><div class="shot-tc">01:00:16<br/>01:00:28</div><div class="shot-desc"><strong>Shot 03</strong> — Prop state: Whiskey glass fill jumps 40% → 80% across cut. <em>Auto-fix: digital paint to match fill level.</em></div><span class="severity-pill high">High</span></div>
+    <div class="shot-row low"><div class="shot-tc">01:00:24<br/>01:00:36</div><div class="shot-desc"><strong>Shot 04</strong> — Clean shot pair. No continuity errors detected.</div><span class="severity-pill low">✓ Clean</span></div>
+    <div class="shot-row high"><div class="shot-tc">01:00:40<br/>01:00:52</div><div class="shot-desc"><strong>Shot 05</strong> — Makeup: Wound on actor's left arm missing in reverse angle. Background extra reappears after exiting earlier.</div><span class="severity-pill high">2× High</span></div>
+    <div class="shot-row high"><div class="shot-tc">01:00:48<br/>01:01:00</div><div class="shot-desc"><strong>Shot 06</strong> — Prop state: Coffee cup moves right hand → left hand across cut. Rain visible in close-up but absent in wide.</div><span class="severity-pill high">High</span></div>
+    <div class="shot-row low"><div class="shot-tc">01:00:56<br/>01:01:08</div><div class="shot-desc"><strong>Shot 07</strong> — Clean shot pair. No continuity errors detected.</div><span class="severity-pill low">✓ Clean</span></div>
+    <div class="shot-row medium"><div class="shot-tc">01:01:04<br/>01:01:16</div><div class="shot-desc"><strong>Shot 08</strong> — Screen direction: Character exits frame left then enters frame left in next shot (crosses the line).</div><span class="severity-pill medium">Medium</span></div>
+    <div class="shot-row high"><div class="shot-tc">01:01:12<br/>01:01:24</div><div class="shot-desc"><strong>Shot 09</strong> — Background extra reappears after earlier exit. Screen direction crossed.</div><span class="severity-pill high">High</span></div>
+
+    <div class="demo-section-title"><span class="accent">◆</span> Try your own frame pair</div>
+    <textarea class="demo-textarea" id="cont-a" placeholder="Frame A description...">Actor at dinner table, wine glass full, candle burning bright</textarea>
+    <textarea class="demo-textarea" id="cont-b" placeholder="Frame B description..." style="margin-top: 8px;">Same table moments later, wine glass half empty, candle noticeably shorter</textarea>
+    <button class="btn btn-gold" style="margin-top: 12px;" onclick="analyzeContinuity()">Run analysis →</button>
+    <div id="cont-result" style="margin-top: 14px;"></div>
+
+    <div class="summary-quote">
+      <div class="label">◆ ENGINEERING NOTES</div>
+      Production stack: Claude Vision API for frame analysis, OpenCV for shot-boundary detection, async FastAPI pipeline with severity classification feeding into VFX patch queues.
+    </div>
+  `,
+
+  orchestration: () => `
+    <div class="demo-tagline">
+      <strong>Cinematic RAG Studio</strong> — screenplay-aware RAG for script search, summaries, story analysis, and source-grounded creative research. The plumbing layer for studio script archives, story development, and content intelligence.
+    </div>
+
+    <div class="demo-tabs">
+      <button class="demo-tab active" onclick="orchTab('rag', this)">◆ Script Retrieval</button>
+      <button class="demo-tab" onclick="orchTab('workflow', this)">◆ Workflow Engine</button>
+      <button class="demo-tab" onclick="orchTab('arch', this)">◆ Architecture</button>
+    </div>
+
+    <div class="demo-panel active" id="orch-rag">
+      <div class="demo-input-row">
+        <input class="demo-input" id="rag-query" value="How does retrieval augmented generation work?" />
+        <button class="btn btn-primary" onclick="runRAG()">Query →</button>
+      </div>
+      <div id="rag-results"></div>
+    </div>
+
+    <div class="demo-panel" id="orch-workflow">
+      <textarea class="demo-textarea" id="wf-yaml" style="font-family: monospace; font-size: 12px; min-height: 200px;">steps:
+  - id: step1
+    tool: clean_text
+    inputs:
+      text: "  hello   world   this   is   messy   "
+    output: clean
+
+  - id: step2
+    agent: summariser
+    inputs:
+      text: "{{clean}}"
+    output: summary
+
+  - id: step3
+    tool: word_count
+    inputs:
+      text: "{{summary}}"
+    output: count</textarea>
+      <button class="btn btn-primary" style="margin-top: 12px;" onclick="runWorkflow()">Execute workflow →</button>
+      <div id="wf-results" style="margin-top: 14px;"></div>
+    </div>
+
+    <div class="demo-panel" id="orch-arch">
+      <div class="architecture-grid">
+        <div class="arch-card"><div class="arch-num">◆ PRIMITIVE 01</div><h4>Agent Router</h4><p>Registers named agent functions and dispatches by name. Each agent is a Python callable that accepts a payload — swap LLM calls for deterministic logic without changing workflow YAML.</p></div>
+        <div class="arch-card"><div class="arch-num">◆ PRIMITIVE 02</div><h4>Tool Registry</h4><p>Named utility functions callable via kwargs. Clean-text, word-count, API wrappers — deterministic building blocks that agents string together in pipelines.</p></div>
+        <div class="arch-card"><div class="arch-num">◆ PRIMITIVE 03</div><h4>RAG Layer</h4><p>TF-IDF document indexer with cosine retrieval. Returns ranked documents plus auto-summary built from leading sentences. Drop-in ready for dense embeddings.</p></div>
+        <div class="arch-card"><div class="arch-num">◆ PRIMITIVE 04</div><h4>Workflow Engine</h4><p>YAML-declared step graph with <code>{{variable}}</code> resolution. Each step calls an agent or tool. Full execution trace captured for debug and audit.</p></div>
+      </div>
+    </div>
+  `,
+
+  discovery: () => `
+    <div class="demo-tagline">
+      <strong>Semantic discovery feed</strong> with TF-IDF ranking and natural-language explanations. Solves the post-binge "what's next" problem — the #1 cancellation trigger on streaming.
+    </div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="disc-q" value="space adventure" placeholder="What are you in the mood for?" />
+      <button class="btn btn-gold" onclick="runDiscovery()">Search →</button>
+    </div>
+    <div class="demo-quick-pills">
+      <span class="label">TRY:</span>
+      <span class="demo-pill" onclick="discoveryPill('sci-fi robot')">sci-fi robot</span>
+      <span class="demo-pill" onclick="discoveryPill('family adventure')">family adventure</span>
+      <span class="demo-pill" onclick="discoveryPill('heartfelt drama')">heartfelt drama</span>
+      <span class="demo-pill" onclick="discoveryPill('action pirates')">action pirates</span>
+    </div>
+    <div class="demo-section-title"><span class="accent">◆</span> Ranked results</div>
+    <div id="disc-results" class="result-grid"></div>
+  `,
+
+  animation: () => `
+    <div class="demo-tagline">
+      <strong>Prompt-to-animatic pipeline</strong> — script generation, shot planning, and visual previews. Designed for experimental CG with diffusion model swap-points (SDXL, ControlNet, character LoRAs).
+    </div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="anim-q" value="A young inventor discovers a glowing crystal in the forest" />
+      <button class="btn btn-gold" onclick="runAnimation()">Generate →</button>
+    </div>
+    <div class="demo-quick-pills">
+      <span class="label">TRY:</span>
+      <span class="demo-pill" onclick="animationPill('A space pirate steals a map to a forgotten planet')">space pirate</span>
+      <span class="demo-pill" onclick="animationPill('A robot learns to paint and falls in love with art')">robot artist</span>
+      <span class="demo-pill" onclick="animationPill('A young witch must deliver a letter through an enchanted forest')">witch journey</span>
+    </div>
+    <div id="anim-results"></div>
+  `,
+
+  adstudio: () => `
+    <div class="demo-tagline">
+      <strong>Brief-to-campaign generator</strong> — produces 3 concepts, short-form scripts, storyboard panels, and ad-tier positioning from a single brief.
+    </div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="ad-brand" value="Orbit Shoes" placeholder="Brand" />
+      <input class="demo-input" id="ad-product" value="AirRun X" placeholder="Product" />
+    </div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="ad-audience" value="urban runners 25-40" placeholder="Target audience" />
+      <input class="demo-input" id="ad-goal" value="product launch awareness" placeholder="Campaign goal" />
+    </div>
+    <button class="btn btn-gold" onclick="runAdStudio()">Generate campaign →</button>
+    <div id="ad-results" style="margin-top: 16px;"></div>
+  `,
+
+  liveads: () => `
+    <div class="demo-tagline">
+      <strong>Real-time ad slot planning</strong> per audience segment and broadcast context. Creative variants and pacing change live based on segment relevance and fatigue control.
+    </div>
+    <div class="demo-input-row">
+      <select class="demo-select" id="la-seg">
+        <option value="sports fans">Sports fans</option>
+        <option value="parents">Parents</option>
+        <option value="young adults">Young adults</option>
+        <option value="luxury shoppers">Luxury shoppers</option>
+      </select>
+      <select class="demo-select" id="la-ctx">
+        <option value="live sports">Live sports (NFL/UEFA)</option>
+        <option value="awards broadcast">Awards broadcast</option>
+        <option value="breaking news">Breaking news</option>
+        <option value="reality TV finale">Reality TV finale</option>
+      </select>
+      <button class="btn btn-gold" onclick="runLiveAds()">Simulate →</button>
+    </div>
+    <div id="la-results" style="margin-top: 16px;"></div>
+  `,
+
+  rec: () => `
+    <div class="demo-tagline">
+      <strong>Streaming personalization engine</strong> for free/premium catalogs with ranking logic, contextual upgrade prompts, and discovery workflows.
+    </div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="rec-q" value="space adventure" placeholder="User interest..." />
+      <button class="btn btn-gold" onclick="runRec()">Recommend →</button>
+    </div>
+    <div class="demo-quick-pills">
+      <span class="label">TRY:</span>
+      <span class="demo-pill" onclick="recPill('live sports championship')">live sports</span>
+      <span class="demo-pill" onclick="recPill('prestige mystery drama')">prestige drama</span>
+      <span class="demo-pill" onclick="recPill('family comedy kids')">family comedy</span>
+    </div>
+    <div id="rec-results" style="margin-top: 16px;"></div>
+  `,
+};
+
+/* CONTINUITY ANALYSIS */
+function analyzeContinuity() {
+  const a = document.getElementById('cont-a').value.trim();
+  const b = document.getElementById('cont-b').value.trim();
+  if (!a || !b) return;
+  const seed = (a + b).length;
+  const errorTemplates = [
+    { type: 'prop_state', sev: 'high', desc: 'Object state changed across cut (fill level / position).', fix: 'Digital paint correction.' },
+    { type: 'lighting', sev: 'medium', desc: 'Shadow direction shifted relative to established sun.', fix: 'Relight pass to match.' },
+    { type: 'environmental', sev: 'medium', desc: 'Environmental detail (rain, time-of-day) inconsistent.', fix: 'Composite environmental layer.' },
+    { type: 'screen_direction', sev: 'medium', desc: 'Action crosses the line — viewer disorientation risk.', fix: 'Editorial: accept or flip shot.' },
+  ];
+  const numErrors = (seed % 3) + 1;
+  const score = 95 - numErrors * 12 - (seed % 10);
+  const errors = errorTemplates.slice(0, numErrors);
+  const scoreColor = score >= 70 ? 'var(--green)' : score >= 50 ? 'var(--amber)' : 'var(--red)';
+  document.getElementById('cont-result').innerHTML = `
+    <div class="shot-row ${score < 50 ? 'high' : score < 70 ? 'medium' : 'low'}">
+      <div class="shot-tc" style="font-family:var(--serif); font-size:24px; color:${scoreColor}; font-weight:600;">${score}</div>
+      <div class="shot-desc"><strong>Custom shot pair analysis</strong> — ${numErrors} continuity issue${numErrors > 1 ? 's' : ''} detected.</div>
+      <span class="severity-pill ${score < 50 ? 'high' : score < 70 ? 'medium' : 'low'}">${score}% match</span>
+    </div>
+    ${errors.map(e => `
+      <div class="result-card ${e.sev === 'high' ? 'red' : 'amber'}" style="margin-top:8px;">
+        <div class="result-meta">${e.type.replace('_',' ').toUpperCase()} · ${e.sev}</div>
+        <div class="result-desc">${e.desc}</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:6px;padding-top:6px;border-top:1px solid var(--line);"><strong style="color:var(--gold)">Fix:</strong> ${e.fix}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+/* ORCHESTRATION */
+function orchTab(which, btn) {
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('orch-' + which).classList.add('active');
+}
+const RAG_DOCS = [
+  { id: 'd1', text: 'Localization workflows need consistent metadata, title translations, and territory-specific packaging for global streaming releases.' },
+  { id: 'd2', text: 'Ad operations teams often automate trafficking, approval routing, and performance reporting through orchestrated AI pipelines.' },
+  { id: 'd3', text: 'Retrieval augmented generation combines search with language generation to ground outputs in source material and reduce hallucination.' },
+  { id: 'd4', text: 'Content metadata extraction at scale requires multi-model approaches — vision for stills, NLP for scripts, audio for dialog.' },
+];
+function runRAG() {
+  const q = document.getElementById('rag-query').value.trim();
+  const qWords = q.toLowerCase().split(/\s+/);
+  const ranked = RAG_DOCS.map(d => {
+    const dWords = d.text.toLowerCase().split(/\s+/);
+    let matches = 0;
+    qWords.forEach(w => { if (w.length > 3 && dWords.some(x => x.includes(w) || w.includes(x))) matches++; });
+    return { ...d, score: +(matches / Math.max(qWords.length, 1) + Math.random() * 0.15).toFixed(3) };
+  }).sort((a, b) => b.score - a.score).slice(0, 3);
+  const summary = ranked.map(d => d.text.split('.')[0]).join('. ') + '.';
+  document.getElementById('rag-results').innerHTML = `
+    <div class="demo-section-title"><span class="accent">◆</span> Retrieved documents · ${ranked.length}</div>
+    ${ranked.map(d => `
+      <div class="doc-result">
+        <div class="head"><span class="id">◆ ${d.id.toUpperCase()}</span><span class="score">sim: ${d.score.toFixed(3)}</span></div>
+        <div class="text">${d.text}</div>
+      </div>
+    `).join('')}
+    <div class="summary-quote"><div class="label">◆ AUTO-GENERATED SUMMARY</div>${summary}</div>
+  `;
+}
+function runWorkflow() {
+  const yaml = document.getElementById('wf-yaml').value;
+  const steps = [];
+  let current = null;
+  yaml.split('\n').forEach(line => {
+    const idMatch = line.match(/^\s*-\s+id:\s*(\w+)/);
+    if (idMatch) { if (current) steps.push(current); current = { id: idMatch[1] }; }
+    else if (current) {
+      const tm = line.match(/tool:\s*(\w+)/);     if (tm) current.tool = tm[1];
+      const am = line.match(/agent:\s*(\w+)/);    if (am) current.agent = am[1];
+      const xm = line.match(/text:\s*"([^"]*)"/); if (xm) current.input = xm[1];
+      const om = line.match(/output:\s*(\w+)/);   if (om) current.output = om[1];
     }
   });
+  if (current) steps.push(current);
+  const ctx = {};
+  const trace = steps.map(s => {
+    let input = s.input || '';
+    const vmatch = input.match(/\{\{(\w+)\}\}/);
+    if (vmatch) input = ctx[vmatch[1]] || input;
+    let result;
+    if (s.tool === 'clean_text') result = input.split(/\s+/).filter(Boolean).join(' ');
+    else if (s.tool === 'word_count') result = input.split(/\s+/).filter(Boolean).length;
+    else if (s.agent === 'summariser') result = input.length > 100 ? input.slice(0, 100) + '...' : input;
+    else result = input;
+    if (s.output) ctx[s.output] = result;
+    return { step: s.id, result };
+  });
+  document.getElementById('wf-results').innerHTML = `
+    <div class="demo-section-title"><span class="accent">◆</span> Execution trace · ${trace.length} steps</div>
+    ${trace.map(t => `
+      <div class="trace-item"><div class="trace-step">◆ STEP: ${t.step}</div><div class="trace-result">${typeof t.result === 'object' ? JSON.stringify(t.result) : String(t.result)}</div></div>
+    `).join('')}
+    <div class="summary-quote"><div class="label">◆ FINAL CONTEXT</div><span style="font-family:var(--mono); font-size: 12px; font-style: normal; word-break: break-all;">${JSON.stringify(ctx, null, 2)}</span></div>
+  `;
+}
 
-  // Reveal animations on intersection
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* DISCOVERY */
+const CATALOG = [
+  { id: '1', title: 'Space Cats', synopsis: 'Cats save the galaxy.', tags: 'space sci-fi family comedy', accent: 'blue' },
+  { id: '2', title: 'Jungle Adventure', synopsis: 'Kids explore a magical jungle.', tags: 'jungle family adventure warm', accent: 'green' },
+  { id: '3', title: 'Robot Dreams', synopsis: 'A robot discovers art and identity.', tags: 'robot sci-fi heartfelt drama', accent: 'violet' },
+  { id: '4', title: 'Sky Pirates', synopsis: 'Treasure hunters soar through the clouds.', tags: 'action adventure sky pirates', accent: 'amber' },
+  { id: '5', title: 'Neon Detective', synopsis: 'A cyberpunk noir mystery in 2087 Tokyo.', tags: 'cyberpunk mystery noir thriller', accent: 'red' },
+  { id: '6', title: 'The Last Lighthouse', synopsis: "A keeper guards an island that shouldn't exist.", tags: 'drama mystery heartfelt prestige', accent: 'blue' },
+];
+function discoveryPill(q) { document.getElementById('disc-q').value = q; runDiscovery(); }
+function runDiscovery() {
+  const q = document.getElementById('disc-q').value.trim().toLowerCase();
+  const qWords = q.split(/\s+/).filter(w => w.length > 1);
+  const ranked = CATALOG.map(c => {
+    const text = (c.tags + ' ' + c.title.toLowerCase());
+    let matches = 0;
+    qWords.forEach(w => { if (text.includes(w) || w.includes(text.split(' ')[0])) matches++; });
+    return { ...c, score: +(matches / Math.max(qWords.length, 1) + Math.random() * 0.2).toFixed(3) };
+  }).sort((a, b) => b.score - a.score).slice(0, 6);
+  document.getElementById('disc-results').innerHTML = ranked.map(r => `
+    <div class="result-card ${r.accent}">
+      <div class="result-meta">SCORE · ${r.score.toFixed(3)}</div>
+      <div class="result-title">${r.title}</div>
+      <div class="result-desc">${r.synopsis}</div>
+      <div class="result-tags">${r.tags.split(' ').map(t => '#' + t).join(' ')}</div>
+      <div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); font-style:italic; margin-top:8px; padding-top:8px; border-top:1px solid var(--line);">Recommended because it matches "${q}"</div>
+    </div>
+  `).join('');
+}
+
+/* ANIMATION */
+const FRAME_GRADIENTS = [
+  'linear-gradient(135deg, #4a2c6d 0%, #9f8aea 100%)',
+  'linear-gradient(135deg, #1a4d5c 0%, #43d9ad 100%)',
+  'linear-gradient(135deg, #7a3a1f 0%, #f0a030 100%)',
+  'linear-gradient(135deg, #3c1a4d 0%, #c8a96e 100%)',
+];
+function animationPill(p) { document.getElementById('anim-q').value = p; runAnimation(); }
+function runAnimation() {
+  const prompt = document.getElementById('anim-q').value.trim();
+  if (!prompt) return;
+  const runId = Math.random().toString(36).substring(2, 9);
+  const script = `${prompt}. The protagonist enters a new world, faces a challenge, finds an unexpected ally, and ends with a visually memorable payoff.`;
+  const shots = script.split(/[,.]/).map(p => p.trim()).filter(Boolean).slice(0, 4).map(p => `Illustrate: ${p}`);
+  document.getElementById('anim-results').innerHTML = `
+    <div class="pipeline-bar">
+      <div class="pipeline-step done"><div class="num">◆ 01</div><div class="lbl">Prompt</div><div class="desc">Story seed</div></div>
+      <div class="pipeline-step done"><div class="num">◆ 02</div><div class="lbl">Script</div><div class="desc">LLM expansion</div></div>
+      <div class="pipeline-step done"><div class="num">◆ 03</div><div class="lbl">Shot plan</div><div class="desc">${shots.length} shots</div></div>
+      <div class="pipeline-step done"><div class="num">◆ 04</div><div class="lbl">Animatic</div><div class="desc">${shots.length} frames</div></div>
+    </div>
+    <div class="demo-section-title"><span class="accent">◆</span> Generated script · run ${runId}</div>
+    <div class="summary-quote"><div class="label">◆ EXPANDED FROM PROMPT</div>"${script}"</div>
+    <div class="demo-section-title"><span class="accent">◆</span> Shot list</div>
+    ${shots.map((s, i) => `
+      <div class="shot-row low">
+        <div class="shot-tc" style="font-family:var(--serif);font-size:24px;color:var(--violet);">0${i+1}</div>
+        <div class="shot-desc">${s}</div>
+        <span class="severity-pill" style="background:rgba(139,110,196,0.12);color:var(--violet);">SHOT</span>
+      </div>
+    `).join('')}
+    <div class="demo-section-title"><span class="accent">◆</span> Animatic preview</div>
+    <div class="frame-grid">
+      ${shots.map((s, i) => `
+        <div class="frame-card">
+          <div class="frame-preview" style="background:${FRAME_GRADIENTS[i % 4]}">
+            <div class="frame-label">SHOT ${String(i+1).padStart(2,'0')}</div>
+            <span style="opacity:0.4;">0${i+1}</span>
+          </div>
+          <div class="frame-caption">${s.replace('Illustrate: ','')}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="summary-quote" style="margin-top: 20px;">
+      <div class="label">◆ PRODUCTION NOTE</div>
+      Frames shown are deterministic placeholder previews. In production, swap the make_frames() function for Stable Diffusion XL inference with a character-consistency LoRA.
+    </div>
+  `;
+}
+
+/* AD STUDIO */
+function runAdStudio() {
+  const brand = document.getElementById('ad-brand').value || 'Brand';
+  const product = document.getElementById('ad-product').value || 'Product';
+  const audience = document.getElementById('ad-audience').value || 'audience';
+  const goal = document.getElementById('ad-goal').value || 'goal';
+  const concepts = [
+    { id: 1, title: `${brand} Concept 1`, angle: `Emotion-first storytelling for ${goal}`, tagline: `${product} for ${audience}`, hook: `Open on a moment of friction in ${audience}'s daily life — ${product} resolves it in one breath.` },
+    { id: 2, title: `${brand} Concept 2`, angle: `Product-benefit clarity to drive ${goal}`, tagline: `${product} for ${audience}`, hook: `Lead with a single feature demonstration, then reveal the brand. Direct, confident, scannable.` },
+    { id: 3, title: `${brand} Concept 3`, angle: `Social proof and urgency for ${goal}`, tagline: `${product} for ${audience}`, hook: `Real ${audience} testimonials cut against a countdown clock. Conversion-optimized.` },
+  ];
+  document.getElementById('ad-results').innerHTML = `
+    <div class="demo-section-title"><span class="accent">◆</span> Three concept directions</div>
+    <div class="concept-grid">
+      ${concepts.map(c => `
+        <div class="concept-card">
+          <div class="concept-num">CONCEPT · 0${c.id}</div>
+          <div class="concept-title">${c.title}</div>
+          <div class="concept-angle">${c.angle}</div>
+          <div class="concept-tag">◆ ${c.tagline}</div>
+          <div class="concept-hook">${c.hook}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="demo-section-title"><span class="accent">◆</span> Scripts (6s / 15s / 30s)</div>
+    <div class="script-row"><div class="script-dur">6s</div><div class="script-text">${brand}: ${product}. Made for ${audience}. Try it now.</div></div>
+    <div class="script-row"><div class="script-dur">15s</div><div class="script-text">Meet ${product} from ${brand}. Designed specifically for ${audience}, with a strong call to action built for ${goal}.</div></div>
+    <div class="script-row"><div class="script-dur">30s</div><div class="script-text">Open with a problem ${audience} recognizes. Introduce ${product} as the answer. Show one emotional beat, one proof point, one branded close. Direct CTA optimized for ${goal}.</div></div>
+    <div class="demo-section-title"><span class="accent">◆</span> Storyboard</div>
+    <div class="storyboard-grid">
+      <div class="sb-card"><div class="scene-num">1</div><div class="sb-label">SCENE 1</div><div class="sb-visual">Establish ${audience} in daily setting.</div><div class="sb-copy">"The moment before ${product}."</div></div>
+      <div class="sb-card"><div class="scene-num">2</div><div class="sb-label">SCENE 2</div><div class="sb-visual">Reveal ${product} in action.</div><div class="sb-copy">"${brand} changes the flow."</div></div>
+      <div class="sb-card"><div class="scene-num">3</div><div class="sb-label">SCENE 3</div><div class="sb-visual">Show payoff with brand lockup.</div><div class="sb-copy">"Choose ${product}."</div></div>
+    </div>
+    <div class="demo-section-title"><span class="accent">◆</span> AI performance forecast</div>
+    <div class="stat-strip">
+      <div class="stat-cell gold"><div class="label">Predicted CTR</div><div class="value">2.8%</div></div>
+      <div class="stat-cell green"><div class="label">Completion</div><div class="value">74%</div></div>
+      <div class="stat-cell blue"><div class="label">Best fit</div><div class="value" style="font-size:14px;line-height:1.3;">${audience}</div></div>
+    </div>
+    <div class="summary-quote"><div class="label">◆ RECOMMENDATION</div>"Concept 1 (emotion-first) is the strongest opening — it aligns ${brand} with a clear viewer payoff while staying concise enough for streaming placements."</div>
+  `;
+}
+
+/* LIVE ADS */
+const ADS_BY_SEG = {
+  'sports fans': [{brand:'Orbit Shoes', creative:'High-energy performance spot', cta:'Shop game-day drop'}],
+  'parents': [{brand:'CalmTea', creative:'Family reset moment', cta:'Try the sleep blend'}],
+  'young adults': [{brand:'Pixel Mobile', creative:'Fast-cut creator phone ad', cta:'Upgrade today'}],
+  'luxury shoppers': [{brand:'Atlas Travel', creative:'Premium getaway montage', cta:'Book exclusive offer'}],
+};
+function runLiveAds() {
+  const seg = document.getElementById('la-seg').value;
+  const ctx = document.getElementById('la-ctx').value;
+  const eligible = ADS_BY_SEG[seg];
+  const slots = [];
+  for (let i = 1; i <= 5; i++) {
+    const ad = eligible[(i - 1) % eligible.length];
+    slots.push({ ...ad, slot: i, moment: `${ctx} break ${i}`, rationale: `Selected for ${seg} during ${ctx} based on relevance + fatigue control.` });
+  }
+  document.getElementById('la-results').innerHTML = `
+    <div class="stat-strip">
+      <div class="stat-cell red"><div class="label">Live</div><div class="value">●</div></div>
+      <div class="stat-cell"><div class="label">Segment</div><div class="value" style="font-size:14px;line-height:1.3;">${seg}</div></div>
+      <div class="stat-cell"><div class="label">Context</div><div class="value" style="font-size:14px;line-height:1.3;">${ctx}</div></div>
+      <div class="stat-cell gold"><div class="label">Slots</div><div class="value">${slots.length}</div></div>
+    </div>
+    <div class="demo-section-title"><span class="accent">◆</span> Real-time slot plan</div>
+    ${slots.map(s => `
+      <div class="ad-slot-row">
+        <div class="ad-slot-num">0${s.slot}</div>
+        <div class="ad-slot-body">
+          <div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:0.1em; margin-bottom:4px;">◆ ${s.moment.toUpperCase()}</div>
+          <strong>${s.brand}</strong> — ${s.creative}
+          <div style="font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic; margin-top:4px;">${s.rationale}</div>
+        </div>
+        <div class="ad-slot-cta">${s.cta}</div>
+      </div>
+    `).join('')}
+    <div class="demo-section-title"><span class="accent">◆</span> Campaign forecast</div>
+    <div class="stat-strip">
+      <div class="stat-cell red"><div class="label">Attention idx</div><div class="value">118</div></div>
+      <div class="stat-cell green"><div class="label">Predicted recall</div><div class="value">31%</div></div>
+      <div class="stat-cell"><div class="label">Frequency cap</div><div class="value">2×</div></div>
+    </div>
+    <div class="summary-quote"><div class="label">◆ STRATEGY NOTE</div>"This plan prioritizes relevance for ${seg} while rotating creatives to reduce repetition during ${ctx}. Slot 3 is the conversion-critical placement based on attention modeling."</div>
+  `;
+}
+
+/* REC ENGINE */
+const REC_CATALOG = [
+  { service: 'Pluto TV', title: 'Action Vault', type: 'free', tags: 'action fast cars heist' },
+  { service: 'Pluto TV', title: 'Family Laughs', type: 'free', tags: 'family comedy kids warm' },
+  { service: 'Paramount+', title: 'Star Frontier', type: 'premium', tags: 'space sci-fi adventure epic' },
+  { service: 'Paramount+', title: 'Championship Access', type: 'premium', tags: 'sports live exclusive premium' },
+  { service: 'Paramount+', title: 'Mystery Estate', type: 'premium', tags: 'mystery thriller prestige drama' },
+];
+function recPill(q) { document.getElementById('rec-q').value = q; runRec(); }
+function runRec() {
+  const q = document.getElementById('rec-q').value.toLowerCase();
+  const qWords = q.split(/\s+/).filter(w => w.length > 2);
+  const scored = REC_CATALOG.map(c => {
+    let m = 0;
+    qWords.forEach(w => { if ((c.tags + ' ' + c.title.toLowerCase()).includes(w)) m++; });
+    return { ...c, score: +(m / Math.max(qWords.length, 1) + Math.random() * 0.2).toFixed(3) };
+  }).sort((a, b) => b.score - a.score);
+  const free = scored.filter(r => r.type === 'free').slice(0, 3);
+  const premium = scored.filter(r => r.type === 'premium').slice(0, 3);
+  const churn = q.includes('sport') ? 'low' : 'medium';
+  document.getElementById('rec-results').innerHTML = `
+    <div class="demo-section-title"><span class="accent">◆</span> Dual-tier recommendations for "${q}"</div>
+    <div class="rec-columns">
+      <div class="rec-col free">
+        <div class="rec-col-head"><h4>Free tier</h4><div class="rec-col-badge">PLUTO TV</div></div>
+        <div class="rec-col-body">
+          ${free.length === 0 ? '<div style="text-align:center; padding: 16px; color: var(--ink-3); font-size: 13px;">No free matches</div>' :
+            free.map(r => `
+              <div class="rec-item">
+                <div style="float:right;font-family:var(--mono);font-size:10px;color:var(--green);">${r.score.toFixed(3)}</div>
+                <h5>${r.title}</h5>
+                <div style="font-size:11px; color:var(--ink-3);">${r.tags}</div>
+                <div class="why">Matches your interest in "${q}".</div>
+              </div>
+            `).join('')}
+        </div>
+      </div>
+      <div class="rec-col premium">
+        <div class="rec-col-head"><h4>Premium tier</h4><div class="rec-col-badge">PARAMOUNT+</div></div>
+        <div class="rec-col-body">
+          ${premium.length === 0 ? '<div style="text-align:center; padding: 16px; color: var(--ink-3); font-size: 13px;">No premium matches</div>' :
+            premium.map(r => `
+              <div class="rec-item">
+                <div style="float:right;font-family:var(--mono);font-size:10px;color:var(--gold);">${r.score.toFixed(3)}</div>
+                <h5>${r.title}</h5>
+                <div style="font-size:11px; color:var(--ink-3);">${r.tags}</div>
+                <div class="why">Matches your interest in "${q}".</div>
+              </div>
+            `).join('')}
+        </div>
+      </div>
+    </div>
+    ${premium.length > 0 ? `
+      <div class="upgrade-panel">
+        <div class="icon">↑</div>
+        <div>
+          <div class="label">CONVERSION OPPORTUNITY</div>
+          <div class="msg">Upgrade to Paramount+ to unlock premium titles best matching "${q}".</div>
+          <div class="offer">◆ Offer: 7-day trial + premium recommendations</div>
+        </div>
+      </div>
+    ` : ''}
+    <div class="churn-panel">
+      <div class="churn-dot ${churn}"></div>
+      <div class="churn-info">
+        <div class="label">CHURN-RISK SIGNAL</div>
+        <div class="level ${churn}">${churn.toUpperCase()}</div>
+        <div class="reason">User is engaging with a focused content cluster; broaden recommendations with one premium bridge title.</div>
+      </div>
+    </div>
+  `;
+}
 </script>
 
 </body>
